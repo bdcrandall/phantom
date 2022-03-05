@@ -250,7 +250,7 @@ def update_cache(action=None, success=None, container=None, results=None, handle
 
     phantom.debug("cache at end is: {}".format(cache))
 
-    phantom.set_list(cache)
+    phantom.set_list("virus_total_cache", cache)
 
     # TODO set color and criticality
 
