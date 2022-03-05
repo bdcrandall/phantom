@@ -32,8 +32,8 @@ def filter_1(action=None, success=None, container=None, results=None, handle=Non
 def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug('check_cache() called')
     
-    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])
-    container_item_0 = [item[0] for item in container_data]
+    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])
+    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]
 
     check_cache__cacheOperation = None
     check_cache__cacheIndex = None
@@ -45,7 +45,7 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     from datetime import date
     
     # Assign new variables for clarity
-    fileHash = container_item_0[0]
+    fileHash = filtered_artifacts_item_1_0[0]
     
     phantom.debug("fileHash is {}".format(fileHash))
     
@@ -69,7 +69,7 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
         if cache[entry][0] == fileHash:
             # Convert string to date object
             yearMonthDay = cache[entry][2].split("-")
-            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])
+            lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))
             
             if date.today() - lastUpdated > 7:
                 # Cached info is older than 7 days and needs to be updated
