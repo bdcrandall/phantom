@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "",
-            "hash": "b192d86592fc268af36b1566849f263c15c1ee49",
+            "hash": "bdccbca84463fae18fa0630a03fe34ca3737c86e",
             "joint": {
                 "cells": [
                     {
@@ -217,8 +217,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 255,
-                        "line_start": 242,
+                        "line_end": 262,
+                        "line_start": 249,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -958,6 +958,482 @@
                         "type": "coa.Decision",
                         "warn": "",
                         "z": 42
+                    },
+                    {
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".functionBlock": {
+                                "text": "check cache"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "custom function"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 1
+                            },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn_grey.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "customCodeEndLineOffset": 8,
+                        "customCodeStartLine": 12,
+                        "custom_callback": "",
+                        "custom_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
+                        "custom_join": "",
+                        "custom_name": "check cache",
+                        "description": "",
+                        "functionBlock": "custom function",
+                        "has_custom": true,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "87330892-33a1-4df3-926c-ae04d2ee1b92",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "legacy": true,
+                        "line_end": 95,
+                        "line_start": 32,
+                        "message": "Configuring now",
+                        "name": "custom function",
+                        "notes": "",
+                        "number": 1,
+                        "order": 3,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "outputVariables": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "cacheOperation"
+                            },
+                            {
+                                "position": 1,
+                                "type": "",
+                                "value": "cacheIndex"
+                            }
+                        ],
+                        "parameters": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "artifact:*.cef.fileHash"
+                            }
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 380,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "check_cache",
+                        "show_number": true,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "custom function",
+                        "status": "deprecating",
+                        "title": "custom function",
+                        "type": "coa.FunctionBlock",
+                        "userGeneratedCode": "\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n",
+                        "warn": false,
+                        "z": 60
+                    },
+                    {
+                        "action": "no op",
+                        "action_type": "investigate",
+                        "active": false,
+                        "active_keys": {},
+                        "active_values": {
+                            "sleep_seconds": "1"
+                        },
+                        "angle": 0,
+                        "app": "Phantom",
+                        "appid": "deb82aa9-22cc-4675-9cf1-534b8d006eb7",
+                        "approver": "",
+                        "assets": [
+                            {
+                                "action": "no op",
+                                "actions": [
+                                    "no op",
+                                    "update list",
+                                    "get action result",
+                                    "create container",
+                                    "import container",
+                                    "export container",
+                                    "deflate item",
+                                    "add artifact",
+                                    "find listitem",
+                                    "add listitem",
+                                    "find artifacts",
+                                    "update artifact tags",
+                                    "add note",
+                                    "update artifact",
+                                    "test connectivity"
+                                ],
+                                "active": true,
+                                "app_name": "Phantom",
+                                "app_version": "3.2.21",
+                                "appid": "deb82aa9-22cc-4675-9cf1-534b8d006eb7",
+                                "asset_name": "phantom",
+                                "config_type": "asset",
+                                "count": 0,
+                                "fields": {
+                                    "sleep_seconds": "1"
+                                },
+                                "has_app": true,
+                                "id": 9,
+                                "loaded": false,
+                                "missing": false,
+                                "name": "phantom",
+                                "output": [
+                                    {
+                                        "data_path": "action_result.status",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "success",
+                                            "failed"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.parameter.sleep_seconds",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            15
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data",
+                                        "data_type": "string"
+                                    },
+                                    {
+                                        "data_path": "action_result.summary",
+                                        "data_type": "string"
+                                    },
+                                    {
+                                        "column_name": "Message",
+                                        "column_order": 0,
+                                        "data_path": "action_result.message",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "Slept for 15 seconds"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "summary.total_objects",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "summary.total_objects_successful",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    }
+                                ],
+                                "parameters": {
+                                    "sleep_seconds": {
+                                        "data_type": "numeric",
+                                        "default": null,
+                                        "description": "Sleep for this many seconds",
+                                        "key": "sleep_seconds",
+                                        "order": 0,
+                                        "required": true
+                                    }
+                                },
+                                "product_name": "Phantom",
+                                "product_vendor": "Phantom",
+                                "targets": "9",
+                                "type": "information"
+                            }
+                        ],
+                        "attrs": {
+                            ".action": {
+                                "text": "no op"
+                            },
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "Investigate"
+                            },
+                            "g.approver image": {
+                                "opacity": 1
+                            },
+                            "g.code image": {
+                                "opacity": 1
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn.svg"
+                            },
+                            "g.icon image": {
+                                "xlink:href": "/inc/coa/img/block_icon_investigate.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            },
+                            "g.timer image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def no_op_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('no_op_1() called')\n        \n    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))\n    \n    # collect data for 'no_op_1' call\n\n    parameters = []\n    \n    # build parameters list for 'no_op_1' call\n    parameters.append({\n        'sleep_seconds': 1,\n    })\n\n    phantom.act(action=\"no op\", parameters=parameters, assets=['phantom'], callback=update_cache, name=\"no_op_1\")\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": true,
+                        "color": "",
+                        "connected_to_start": true,
+                        "connection_name": "file reputation",
+                        "connection_type": "action",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "delay": 0,
+                        "description": "",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "473c9199-03e3-4477-824a-bad31592bee8",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "def join_no_op_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None):\n    phantom.debug('join_no_op_1() called')\n    \n    # if the joined function has already been called, do nothing\n    if phantom.get_run_data(key='join_no_op_1_called'):\n        return\n\n    # no callbacks to check, call connected block \"no_op_1\"\n    phantom.save_run_data(key='join_no_op_1_called', value='no_op_1', auto=True)\n\n    no_op_1(container=container, handle=handle)\n    \n    return",
+                        "join_optional": [
+                            "file_reputation"
+                        ],
+                        "join_start": 154,
+                        "line_end": 168,
+                        "line_start": 136,
+                        "message": "Configuring now",
+                        "name": "no op",
+                        "notes": "",
+                        "number": 1,
+                        "order": 6,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 960,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "no_op_1",
+                        "required_params": {
+                            "sleep_seconds": true
+                        },
+                        "reviewer": "",
+                        "show_number": false,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "app_action_assets",
+                        "status": "",
+                        "title": "Investigate",
+                        "type": "coa.Action",
+                        "warn": "",
+                        "z": 62
                     },
                     {
                         "action": "file reputation",
@@ -1835,382 +2311,8 @@
                         "status": "",
                         "title": "Investigate",
                         "type": "coa.Action",
-                        "warn": false,
-                        "z": 50
-                    },
-                    {
-                        "action": "no op",
-                        "action_type": "investigate",
-                        "active": false,
-                        "active_keys": {},
-                        "active_values": {},
-                        "angle": 0,
-                        "app": "Phantom",
-                        "appid": "deb82aa9-22cc-4675-9cf1-534b8d006eb7",
-                        "approver": "",
-                        "assets": [],
-                        "attrs": {
-                            ".action": {
-                                "text": "no op"
-                            },
-                            ".background": {
-                                "fill": "#000000",
-                                "stroke": "#E6984E"
-                            },
-                            ".color-band": {
-                                "fill": "#3C444D"
-                            },
-                            ".inPorts>.port-in": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".inPorts>.port-in>.port-body": {
-                                "port": {
-                                    "id": "in",
-                                    "type": "in"
-                                }
-                            },
-                            ".message": {
-                                "opacity": 0,
-                                "ref-x": 5,
-                                "ref-y": 105,
-                                "text": "Configuring now"
-                            },
-                            ".outPorts>.port-out": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".outPorts>.port-out>.port-body": {
-                                "port": {
-                                    "id": "out",
-                                    "type": "out"
-                                }
-                            },
-                            ".title": {
-                                "text": "Investigate"
-                            },
-                            "g.approver image": {
-                                "opacity": 1
-                            },
-                            "g.code image": {
-                                "opacity": 1
-                            },
-                            "g.delete": {
-                                "display": "none"
-                            },
-                            "g.error": {
-                                "opacity": 1
-                            },
-                            "g.error image": {
-                                "xlink:href": "/inc/coa/img/block_icon_warn.svg"
-                            },
-                            "g.icon image": {
-                                "xlink:href": "/inc/coa/img/block_icon_investigate.svg"
-                            },
-                            "g.notes": {
-                                "display": "block"
-                            },
-                            "g.notes image": {
-                                "opacity": 1
-                            },
-                            "g.timer image": {
-                                "opacity": 1
-                            }
-                        },
-                        "block_code": "def no_op_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('no_op_1() called')\n        \n    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))\n\n    parameters = []\n\n    phantom.act(action=\"no op\", parameters=parameters, callback=update_cache, name=\"no_op_1\")\n\n    return",
-                        "callback_code": "",
-                        "callback_start": 1,
-                        "callsback": true,
-                        "color": "",
-                        "connected_to_start": true,
-                        "connection_name": "file reputation",
-                        "connection_type": "action",
-                        "custom_callback": "",
-                        "custom_code": "",
-                        "custom_join": "",
-                        "custom_name": "",
-                        "delay": 0,
-                        "description": "",
-                        "has_custom": false,
-                        "has_custom_block": false,
-                        "has_custom_callback": false,
-                        "has_custom_join": false,
-                        "id": "473c9199-03e3-4477-824a-bad31592bee8",
-                        "inPorts": [
-                            "in"
-                        ],
-                        "join_code": "def join_no_op_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None):\n    phantom.debug('join_no_op_1() called')\n    \n    # if the joined function has already been called, do nothing\n    if phantom.get_run_data(key='join_no_op_1_called'):\n        return\n\n    # no callbacks to check, call connected block \"no_op_1\"\n    phantom.save_run_data(key='join_no_op_1_called', value='no_op_1', auto=True)\n\n    no_op_1(container=container, handle=handle)\n    \n    return",
-                        "join_optional": [
-                            "file_reputation"
-                        ],
-                        "join_start": 147,
-                        "line_end": 161,
-                        "line_start": 136,
-                        "message": "Configuring now",
-                        "name": "no op",
-                        "notes": "",
-                        "number": 1,
-                        "order": 6,
-                        "outPorts": [
-                            "out"
-                        ],
-                        "ports": {
-                            "groups": {
-                                "in": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "left"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "left"
-                                    }
-                                },
-                                "out": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "right"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "right"
-                                    }
-                                }
-                            }
-                        },
-                        "position": {
-                            "x": 960,
-                            "y": 80
-                        },
-                        "previous_function": "",
-                        "previous_name": "no_op_1",
-                        "required_params": {},
-                        "reviewer": "",
-                        "show_number": false,
-                        "size": {
-                            "height": 100,
-                            "width": 180
-                        },
-                        "state": "app_action_assets",
-                        "status": "warn",
-                        "title": "Investigate",
-                        "type": "coa.Action",
-                        "warn": false,
-                        "z": 54
-                    },
-                    {
-                        "active": false,
-                        "angle": 0,
-                        "attrs": {
-                            ".background": {
-                                "fill": "#000000",
-                                "stroke": "#5C6773"
-                            },
-                            ".color-band": {
-                                "fill": "#3C444D"
-                            },
-                            ".functionBlock": {
-                                "text": "check cache"
-                            },
-                            ".inPorts>.port-in": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".inPorts>.port-in>.port-body": {
-                                "port": {
-                                    "id": "in",
-                                    "type": "in"
-                                }
-                            },
-                            ".message": {
-                                "opacity": 0,
-                                "ref-x": 5,
-                                "ref-y": 105,
-                                "text": "Configuring now"
-                            },
-                            ".outPorts>.port-out": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".outPorts>.port-out>.port-body": {
-                                "port": {
-                                    "id": "out",
-                                    "type": "out"
-                                }
-                            },
-                            ".title": {
-                                "text": "custom function"
-                            },
-                            "g.delete": {
-                                "display": "none"
-                            },
-                            "g.error": {
-                                "opacity": 1
-                            },
-                            "g.error image": {
-                                "xlink:href": "/inc/coa/img/block_icon_warn_grey.svg"
-                            },
-                            "g.notes": {
-                                "display": "block"
-                            },
-                            "g.notes image": {
-                                "opacity": 1
-                            }
-                        },
-                        "block_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
-                        "callback_code": "",
-                        "callback_start": 1,
-                        "callsback": false,
-                        "connected_to_start": true,
-                        "connection_name": "",
-                        "connection_type": "",
-                        "customCodeEndLineOffset": 8,
-                        "customCodeStartLine": 12,
-                        "custom_callback": "",
-                        "custom_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
-                        "custom_join": "",
-                        "custom_name": "check cache",
-                        "description": "",
-                        "functionBlock": "custom function",
-                        "has_custom": true,
-                        "has_custom_block": false,
-                        "has_custom_callback": false,
-                        "has_custom_join": false,
-                        "id": "87330892-33a1-4df3-926c-ae04d2ee1b92",
-                        "inPorts": [
-                            "in"
-                        ],
-                        "join_code": "",
-                        "join_optional": [],
-                        "join_start": 1,
-                        "legacy": true,
-                        "line_end": 95,
-                        "line_start": 32,
-                        "message": "Configuring now",
-                        "name": "custom function",
-                        "notes": "",
-                        "number": 1,
-                        "order": 3,
-                        "outPorts": [
-                            "out"
-                        ],
-                        "outputVariables": [
-                            {
-                                "position": 0,
-                                "type": "",
-                                "value": "cacheOperation"
-                            },
-                            {
-                                "position": 1,
-                                "type": "",
-                                "value": "cacheIndex"
-                            }
-                        ],
-                        "parameters": [
-                            {
-                                "position": 0,
-                                "type": "",
-                                "value": "artifact:*.cef.fileHash"
-                            }
-                        ],
-                        "ports": {
-                            "groups": {
-                                "in": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "left"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "left"
-                                    }
-                                },
-                                "out": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "right"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "right"
-                                    }
-                                }
-                            }
-                        },
-                        "position": {
-                            "x": 380,
-                            "y": 80
-                        },
-                        "previous_function": "",
-                        "previous_name": "check_cache",
-                        "show_number": true,
-                        "size": {
-                            "height": 100,
-                            "width": 180
-                        },
-                        "state": "custom function",
-                        "status": "deprecating",
-                        "title": "custom function",
-                        "type": "coa.FunctionBlock",
-                        "userGeneratedCode": "\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n",
-                        "warn": false,
-                        "z": 60
+                        "warn": "",
+                        "z": 63
                     },
                     {
                         "active": false,
@@ -2298,8 +2400,8 @@
                         "join_optional": [],
                         "join_start": 1,
                         "legacy": true,
-                        "line_end": 242,
-                        "line_start": 164,
+                        "line_end": 249,
+                        "line_start": 171,
                         "message": "Configuring now",
                         "name": "custom function",
                         "notes": "",
@@ -2416,7 +2518,7 @@
                         "type": "coa.FunctionBlock",
                         "userGeneratedCode": "\n    from datetime import date\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Use variable names that are easier to follow\n    cacheOperation = check_cache__cacheOperation\n    cacheIndex = check_cache__cacheIndex\n    fileHash = filtered_artifacts_item_1_0\n    fileName = results_item_1_1\n    fileReputation = results_item_1_0\n    fileLastAnalyzed = results_item_1_2\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n    \n    if cacheOperation == \"add\":\n        # Create cache entry from VT results\n        newEntry = []\n        newEntry.append(fileHash)\n        newEntry.append(fileName)\n        newEntry.append(fileLastAnalyzed)\n        newEntry.append(fileReputation)\n        newEntry.append(date.today().isoformat())\n        # Set counter tracking lookups to 1\n        newEntry.append(1)\n        # Add entry to cache\n        cache.append(newEntry)\n        cacheIndex = len(cache) - 1\n    elif cacheOperation == \"update\":\n        # Update cache with latest results from VT\n        cache[cacheIndex][2] = fileLastAnalyzed\n        cache[cacheIndex][3] = fileReputation\n        cache[cacheIndex][4] = date.today().isoformat()\n        # Increment counter tracking number of times we've looked up this file hash\n        cache[cacheIndex][5] = cache[cacheIndex][5] + 1\n    \n    # Pull results from cache list and update container\n    message = \"filehash: {0}, fileName: {1}, lastAnalyzed: {2}, malicous: {3}, updated: {4}, lookupCount: {5}\".format(\n        cache[cacheIndex][0],\n        cache[cacheIndex][1],\n        cache[cacheIndex][2],\n        cache[cacheIndex][3],\n        cache[cacheIndex][4],\n        cache[cacheIndex][5]\n    )\n    phantom.add_note(note_type=\"general\", title=\"VT Cache Results\", content=message)\n\n    # TODO set color and criticality\n\n",
                         "warn": false,
-                        "z": 61
+                        "z": 64
                     }
                 ]
             },
@@ -2429,7 +2531,7 @@
         "schema": "4",
         "version": "5.2.1.78411"
     },
-    "create_time": "2022-03-05T17:09:54.896935+00:00",
+    "create_time": "2022-03-05T17:10:32.672517+00:00",
     "draft_mode": false,
     "labels": [
         "class"

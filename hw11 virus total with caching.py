@@ -137,10 +137,17 @@ def no_op_1(action=None, success=None, container=None, results=None, handle=None
     phantom.debug('no_op_1() called')
         
     #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+    
+    # collect data for 'no_op_1' call
 
     parameters = []
+    
+    # build parameters list for 'no_op_1' call
+    parameters.append({
+        'sleep_seconds': 1,
+    })
 
-    phantom.act(action="no op", parameters=parameters, callback=update_cache, name="no_op_1")
+    phantom.act(action="no op", parameters=parameters, assets=['phantom'], callback=update_cache, name="no_op_1")
 
     return
 
