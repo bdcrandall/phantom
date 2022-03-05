@@ -45,6 +45,7 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     from datetime import date
     from datetime import timedelta
     
+    # Set maximum cache age to 7 days
     maxAge = timedelta(days=7)
     
     # Assign new variables for clarity
@@ -56,9 +57,6 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     success, message, cache = phantom.get_list("virus_total_cache")
     
     # TODO put in error handling here if list can't be retrieved
-    phantom.debug("success: {}".format(success))
-    phantom.debug("message: {}".format(message))
-    phantom.debug("cache: {}".format(cache))
     
     # Default operation is to look up info and add it to cache
     cacheOperation = "add"
@@ -68,14 +66,13 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
         
     # Iterate through cache to search for fileHash
     for entry in range(0, len(cache)):
-        phantom.debug("Entry {} in cache: {}".format(entry, cache[entry]))
         if cache[entry][0] == fileHash:
             # Convert string to date object
             yearMonthDay = cache[entry][2].split("-")
             lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))
             
             if date.today() - lastUpdated > maxAge:
-                # Cached info is older than 7 days and needs to be updated
+                # Cached info is too old and needs to be updated
                 cacheOperation = "update"
                 cacheIndex = entry
                 break
