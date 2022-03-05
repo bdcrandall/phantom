@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "",
-            "hash": "bdccbca84463fae18fa0630a03fe34ca3737c86e",
+            "hash": "4452fca62158ff4ded990b10644d4ef41c59b110",
             "joint": {
                 "cells": [
                     {
@@ -217,8 +217,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 262,
-                        "line_start": 249,
+                        "line_end": 264,
+                        "line_start": 251,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -770,382 +770,6 @@
                         "z": 32
                     },
                     {
-                        "active": false,
-                        "angle": 0,
-                        "attrs": {
-                            ".background": {
-                                "fill": "#000000",
-                                "stroke": "#637282",
-                                "transform": "rotate(45 30 70)"
-                            },
-                            ".inPorts>.port-0>.port-body": {
-                                "port": {
-                                    "id": "in",
-                                    "type": "in"
-                                }
-                            },
-                            ".number": {
-                                "text": 2
-                            },
-                            ".outPorts>.port-0": {
-                                "port": {
-                                    "id": "out-1",
-                                    "type": "out"
-                                },
-                                "ref-x": 83,
-                                "ref-y": 40
-                            },
-                            ".outPorts>.port-0>.port-body": {
-                                "port": {
-                                    "id": "out-1",
-                                    "type": "out"
-                                }
-                            },
-                            ".outPorts>.port-1": {
-                                "port": {
-                                    "id": "out-2",
-                                    "type": "out"
-                                },
-                                "ref-x": 41,
-                                "ref-y": 82
-                            },
-                            ".outPorts>.port-1>.port-body": {
-                                "port": {
-                                    "id": "out-2",
-                                    "type": "out"
-                                }
-                            },
-                            "g.delete": {
-                                "display": "none"
-                            },
-                            "g.error": {
-                                "opacity": 0
-                            },
-                            "g.notes": {
-                                "display": "block"
-                            },
-                            "g.notes image": {
-                                "opacity": 1
-                            }
-                        },
-                        "block_code": "def decision_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('decision_2() called')\n\n    # check for 'if' condition 1\n    matched = phantom.decision(\n        container=container,\n        conditions=[\n            [\"check_cache:custom_function:cacheOperation\", \"==\", \"read\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched:\n        join_no_op_1(action=action, success=success, container=container, results=results, handle=handle, custom_function=custom_function)\n        return\n\n    # call connected blocks for 'else' condition 2\n    file_reputation(action=action, success=success, container=container, results=results, handle=handle, custom_function=custom_function)\n\n    return",
-                        "callback_code": "",
-                        "callback_start": 1,
-                        "callsback": false,
-                        "connected_to_start": true,
-                        "connection_name": "",
-                        "connection_type": "",
-                        "custom_callback": "",
-                        "custom_code": "",
-                        "custom_join": "",
-                        "custom_name": "",
-                        "description": "",
-                        "hasElse": true,
-                        "has_custom": false,
-                        "has_custom_block": false,
-                        "has_custom_callback": false,
-                        "has_custom_join": false,
-                        "id": "dde556b4-daa8-4c1b-813f-ca786a1eff94",
-                        "inPorts": [
-                            "in"
-                        ],
-                        "join_code": "",
-                        "join_optional": [],
-                        "join_start": 1,
-                        "line_end": 115,
-                        "line_start": 95,
-                        "name": "decision",
-                        "notes": "",
-                        "number": 2,
-                        "order": 4,
-                        "outPorts": [
-                            "out-1",
-                            "out-2"
-                        ],
-                        "outputs": [
-                            {
-                                "conditions": [
-                                    {
-                                        "comparison": "==",
-                                        "data_type": "",
-                                        "param": "check_cache:custom_function:cacheOperation",
-                                        "value": "read"
-                                    }
-                                ],
-                                "display": "If",
-                                "logic": "and",
-                                "type": "if"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "comparison": "==",
-                                        "data_type": "",
-                                        "param": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "display": "Else",
-                                "logic": "and",
-                                "type": "else"
-                            }
-                        ],
-                        "ports": {
-                            "groups": {
-                                "in": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "left"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "left"
-                                    }
-                                },
-                                "out": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "right"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "right"
-                                    }
-                                }
-                            }
-                        },
-                        "position": {
-                            "x": 620,
-                            "y": 80
-                        },
-                        "previous_function": "",
-                        "previous_name": "decision_2",
-                        "show_number": true,
-                        "size": {
-                            "height": 82,
-                            "width": 82
-                        },
-                        "state": "decision",
-                        "status": "",
-                        "type": "coa.Decision",
-                        "warn": "",
-                        "z": 42
-                    },
-                    {
-                        "active": false,
-                        "angle": 0,
-                        "attrs": {
-                            ".background": {
-                                "fill": "#000000",
-                                "stroke": "#5C6773"
-                            },
-                            ".color-band": {
-                                "fill": "#3C444D"
-                            },
-                            ".functionBlock": {
-                                "text": "check cache"
-                            },
-                            ".inPorts>.port-in": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".inPorts>.port-in>.port-body": {
-                                "port": {
-                                    "id": "in",
-                                    "type": "in"
-                                }
-                            },
-                            ".message": {
-                                "opacity": 0,
-                                "ref-x": 5,
-                                "ref-y": 105,
-                                "text": "Configuring now"
-                            },
-                            ".outPorts>.port-out": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".outPorts>.port-out>.port-body": {
-                                "port": {
-                                    "id": "out",
-                                    "type": "out"
-                                }
-                            },
-                            ".title": {
-                                "text": "custom function"
-                            },
-                            "g.delete": {
-                                "display": "none"
-                            },
-                            "g.error": {
-                                "opacity": 1
-                            },
-                            "g.error image": {
-                                "xlink:href": "/inc/coa/img/block_icon_warn_grey.svg"
-                            },
-                            "g.notes": {
-                                "display": "block"
-                            },
-                            "g.notes image": {
-                                "opacity": 1
-                            }
-                        },
-                        "block_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
-                        "callback_code": "",
-                        "callback_start": 1,
-                        "callsback": false,
-                        "connected_to_start": true,
-                        "connection_name": "",
-                        "connection_type": "",
-                        "customCodeEndLineOffset": 8,
-                        "customCodeStartLine": 12,
-                        "custom_callback": "",
-                        "custom_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
-                        "custom_join": "",
-                        "custom_name": "check cache",
-                        "description": "",
-                        "functionBlock": "custom function",
-                        "has_custom": true,
-                        "has_custom_block": false,
-                        "has_custom_callback": false,
-                        "has_custom_join": false,
-                        "id": "87330892-33a1-4df3-926c-ae04d2ee1b92",
-                        "inPorts": [
-                            "in"
-                        ],
-                        "join_code": "",
-                        "join_optional": [],
-                        "join_start": 1,
-                        "legacy": true,
-                        "line_end": 95,
-                        "line_start": 32,
-                        "message": "Configuring now",
-                        "name": "custom function",
-                        "notes": "",
-                        "number": 1,
-                        "order": 3,
-                        "outPorts": [
-                            "out"
-                        ],
-                        "outputVariables": [
-                            {
-                                "position": 0,
-                                "type": "",
-                                "value": "cacheOperation"
-                            },
-                            {
-                                "position": 1,
-                                "type": "",
-                                "value": "cacheIndex"
-                            }
-                        ],
-                        "parameters": [
-                            {
-                                "position": 0,
-                                "type": "",
-                                "value": "artifact:*.cef.fileHash"
-                            }
-                        ],
-                        "ports": {
-                            "groups": {
-                                "in": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "left"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "left"
-                                    }
-                                },
-                                "out": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "right"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "right"
-                                    }
-                                }
-                            }
-                        },
-                        "position": {
-                            "x": 380,
-                            "y": 80
-                        },
-                        "previous_function": "",
-                        "previous_name": "check_cache",
-                        "show_number": true,
-                        "size": {
-                            "height": 100,
-                            "width": 180
-                        },
-                        "state": "custom function",
-                        "status": "deprecating",
-                        "title": "custom function",
-                        "type": "coa.FunctionBlock",
-                        "userGeneratedCode": "\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n",
-                        "warn": false,
-                        "z": 60
-                    },
-                    {
                         "action": "no op",
                         "action_type": "investigate",
                         "active": false,
@@ -1350,9 +974,9 @@
                         "join_optional": [
                             "file_reputation"
                         ],
-                        "join_start": 154,
-                        "line_end": 168,
-                        "line_start": 136,
+                        "join_start": 156,
+                        "line_end": 170,
+                        "line_start": 138,
                         "message": "Configuring now",
                         "name": "no op",
                         "notes": "",
@@ -2230,8 +1854,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 136,
-                        "line_start": 115,
+                        "line_end": 138,
+                        "line_start": 117,
                         "message": "Configuring now",
                         "name": "file reputation",
                         "notes": "",
@@ -2400,8 +2024,8 @@
                         "join_optional": [],
                         "join_start": 1,
                         "legacy": true,
-                        "line_end": 249,
-                        "line_start": 171,
+                        "line_end": 251,
+                        "line_start": 173,
                         "message": "Configuring now",
                         "name": "custom function",
                         "notes": "",
@@ -2519,6 +2143,382 @@
                         "userGeneratedCode": "\n    from datetime import date\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Use variable names that are easier to follow\n    cacheOperation = check_cache__cacheOperation\n    cacheIndex = check_cache__cacheIndex\n    fileHash = filtered_artifacts_item_1_0\n    fileName = results_item_1_1\n    fileReputation = results_item_1_0\n    fileLastAnalyzed = results_item_1_2\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n    \n    if cacheOperation == \"add\":\n        # Create cache entry from VT results\n        newEntry = []\n        newEntry.append(fileHash)\n        newEntry.append(fileName)\n        newEntry.append(fileLastAnalyzed)\n        newEntry.append(fileReputation)\n        newEntry.append(date.today().isoformat())\n        # Set counter tracking lookups to 1\n        newEntry.append(1)\n        # Add entry to cache\n        cache.append(newEntry)\n        cacheIndex = len(cache) - 1\n    elif cacheOperation == \"update\":\n        # Update cache with latest results from VT\n        cache[cacheIndex][2] = fileLastAnalyzed\n        cache[cacheIndex][3] = fileReputation\n        cache[cacheIndex][4] = date.today().isoformat()\n        # Increment counter tracking number of times we've looked up this file hash\n        cache[cacheIndex][5] = cache[cacheIndex][5] + 1\n    \n    # Pull results from cache list and update container\n    message = \"filehash: {0}, fileName: {1}, lastAnalyzed: {2}, malicous: {3}, updated: {4}, lookupCount: {5}\".format(\n        cache[cacheIndex][0],\n        cache[cacheIndex][1],\n        cache[cacheIndex][2],\n        cache[cacheIndex][3],\n        cache[cacheIndex][4],\n        cache[cacheIndex][5]\n    )\n    phantom.add_note(note_type=\"general\", title=\"VT Cache Results\", content=message)\n\n    # TODO set color and criticality\n\n",
                         "warn": false,
                         "z": 64
+                    },
+                    {
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#637282",
+                                "transform": "rotate(45 30 70)"
+                            },
+                            ".inPorts>.port-0>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".number": {
+                                "text": 2
+                            },
+                            ".outPorts>.port-0": {
+                                "port": {
+                                    "id": "out-1",
+                                    "type": "out"
+                                },
+                                "ref-x": 83,
+                                "ref-y": 40
+                            },
+                            ".outPorts>.port-0>.port-body": {
+                                "port": {
+                                    "id": "out-1",
+                                    "type": "out"
+                                }
+                            },
+                            ".outPorts>.port-1": {
+                                "port": {
+                                    "id": "out-2",
+                                    "type": "out"
+                                },
+                                "ref-x": 41,
+                                "ref-y": 82
+                            },
+                            ".outPorts>.port-1>.port-body": {
+                                "port": {
+                                    "id": "out-2",
+                                    "type": "out"
+                                }
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def decision_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('decision_2() called')\n\n    # check for 'if' condition 1\n    matched = phantom.decision(\n        container=container,\n        conditions=[\n            [\"check_cache:custom_function:cacheOperation\", \"==\", \"\\\"read\\\"\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched:\n        join_no_op_1(action=action, success=success, container=container, results=results, handle=handle, custom_function=custom_function)\n        return\n\n    # call connected blocks for 'else' condition 2\n    file_reputation(action=action, success=success, container=container, results=results, handle=handle, custom_function=custom_function)\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "description": "",
+                        "hasElse": true,
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "dde556b4-daa8-4c1b-813f-ca786a1eff94",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "line_end": 117,
+                        "line_start": 97,
+                        "name": "decision",
+                        "notes": "",
+                        "number": 2,
+                        "order": 4,
+                        "outPorts": [
+                            "out-1",
+                            "out-2"
+                        ],
+                        "outputs": [
+                            {
+                                "conditions": [
+                                    {
+                                        "comparison": "==",
+                                        "data_type": "",
+                                        "param": "check_cache:custom_function:cacheOperation",
+                                        "value": "\"read\""
+                                    }
+                                ],
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "comparison": "==",
+                                        "data_type": "",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 620,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "decision_2",
+                        "show_number": true,
+                        "size": {
+                            "height": 82,
+                            "width": 82
+                        },
+                        "state": "decision",
+                        "status": "",
+                        "type": "coa.Decision",
+                        "warn": "",
+                        "z": 66
+                    },
+                    {
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".functionBlock": {
+                                "text": "check cache"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "custom function"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 1
+                            },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn_grey.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "customCodeEndLineOffset": 8,
+                        "customCodeStartLine": 12,
+                        "custom_callback": "",
+                        "custom_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n    \n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
+                        "custom_join": "",
+                        "custom_name": "check cache",
+                        "description": "",
+                        "functionBlock": "custom function",
+                        "has_custom": true,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "87330892-33a1-4df3-926c-ae04d2ee1b92",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "legacy": true,
+                        "line_end": 97,
+                        "line_start": 32,
+                        "message": "Configuring now",
+                        "name": "custom function",
+                        "notes": "",
+                        "number": 1,
+                        "order": 3,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "outputVariables": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "cacheOperation"
+                            },
+                            {
+                                "position": 1,
+                                "type": "",
+                                "value": "cacheIndex"
+                            }
+                        ],
+                        "parameters": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "artifact:*.cef.fileHash"
+                            }
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 380,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "check_cache",
+                        "show_number": true,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "custom function",
+                        "status": "deprecating",
+                        "title": "custom function",
+                        "type": "coa.FunctionBlock",
+                        "userGeneratedCode": "\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n    \n    ",
+                        "warn": false,
+                        "z": 67
                     }
                 ]
             },
@@ -2531,7 +2531,7 @@
         "schema": "4",
         "version": "5.2.1.78411"
     },
-    "create_time": "2022-03-05T17:10:32.672517+00:00",
+    "create_time": "2022-03-05T21:59:01.532497+00:00",
     "draft_mode": false,
     "labels": [
         "class"

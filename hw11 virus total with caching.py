@@ -82,6 +82,8 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     # Return the location of the data in the cache
     check_cache__cacheIndex = cacheIndex
 
+    phantom.debug("cacheOperation: {}, cacheIndex: {}".format(cacheOperation, cacheIndex))
+
     ################################################################################
     ## Custom Code End
     ################################################################################
@@ -99,7 +101,7 @@ def decision_2(action=None, success=None, container=None, results=None, handle=N
     matched = phantom.decision(
         container=container,
         conditions=[
-            ["check_cache:custom_function:cacheOperation", "==", "read"],
+            ["check_cache:custom_function:cacheOperation", "==", "\"read\""],
         ])
 
     # call connected blocks if condition 1 matched
