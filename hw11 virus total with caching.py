@@ -48,7 +48,9 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     fileHash = container_item_0
     
     # Retrieve list containing cache
-    cache = phantom.get_list("virus_total_cache")
+    success, message, cache = phantom.get_list("virus_total_cache")
+    
+    # TODO put in error handling here if list can't be retrieved
     
     # Default operation is to look up info and add it to cache
     cacheOperation = "add"
