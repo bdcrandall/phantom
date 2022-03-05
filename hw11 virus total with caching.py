@@ -195,8 +195,10 @@ def update_cache(action=None, success=None, container=None, results=None, handle
     fileLastAnalyzed = results_item_1_2
 
     # Retrieve list containing cache
-    cache = phantom.get_list("virus_total_cache")
+    success, message, cache = phantom.get_list("virus_total_cache")
 
+    # TODO put in error handling here if list can't be retrieved
+    
     if cacheOperation == "add":
         # Create cache entry from VT results
         newEntry = []
