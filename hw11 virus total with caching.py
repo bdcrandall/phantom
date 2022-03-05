@@ -45,7 +45,7 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     from datetime import date
     
     # Assign new variables for clarity
-    fileHash = container_item_0
+    fileHash = container_item_0[0]
     
     phantom.debug("fileHash is {}".format(fileHash))
     
