@@ -198,15 +198,16 @@ def update_cache(action=None, success=None, container=None, results=None, handle
     cache = phantom.get_list("virus_total_cache")
 
     if cacheOperation == "add":
-        # Add VT results to cache
+        # Create cache entry from VT results
         newEntry = []
-        newEntry[0] = fileHash
-        newEntry[1] = fileName
-        newEntry[2] = fileLastAnalyzed
-        newEntry[3] = fileReputation
-        newEntry[4] = date.today().isoformat()
+        newEntry.append(fileHash)
+        newEntry.append(fileName)
+        newEntry.append(fileLastAnalyzed)
+        newEntry.append(fileReputation)
+        newEntry.append(date.today().isoformat())
         # Set counter tracking lookups to 1
-        newEntry[5] = 1
+        newEntry.append(1)
+        # Add entry to cache
         cache.append(newEntry)
         cacheIndex = len(cache) - 1
     elif cacheOperation == "update":
