@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "",
-            "hash": "7a788b0bf5521ae2a9ee3785e965c885c1d74fd3",
+            "hash": "cd495fd05ae04051cfddcaaf91033a452fb3233a",
             "joint": {
                 "cells": [
                     {
@@ -217,8 +217,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 270,
-                        "line_start": 257,
+                        "line_end": 273,
+                        "line_start": 260,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -1564,8 +1564,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 144,
-                        "line_start": 123,
+                        "line_end": 147,
+                        "line_start": 126,
                         "message": "Configuring now",
                         "name": "file reputation",
                         "notes": "",
@@ -1731,8 +1731,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 123,
-                        "line_start": 103,
+                        "line_end": 126,
+                        "line_start": 106,
                         "name": "decision",
                         "notes": "",
                         "number": 2,
@@ -2043,9 +2043,9 @@
                         "join_optional": [
                             "file_reputation"
                         ],
-                        "join_start": 162,
-                        "line_end": 176,
-                        "line_start": 144,
+                        "join_start": 165,
+                        "line_end": 179,
+                        "line_start": 147,
                         "message": "Configuring now",
                         "name": "no op",
                         "notes": "",
@@ -2214,8 +2214,8 @@
                         "join_optional": [],
                         "join_start": 1,
                         "legacy": true,
-                        "line_end": 257,
-                        "line_start": 179,
+                        "line_end": 260,
+                        "line_start": 182,
                         "message": "Configuring now",
                         "name": "custom function",
                         "notes": "",
@@ -2393,7 +2393,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = filtered_artifacts_item_1_0[0]\n    \n    phantom.debug(\"fileHash is {}\".format(fileHash))\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    phantom.debug(\"success: {}\".format(success))\n    phantom.debug(\"message: {}\".format(message))\n    phantom.debug(\"cache: {}\".format(cache))\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        phantom.debug(\"Entry {} in cache: {}\".format(entry, cache[entry]))\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
+                        "block_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    from datetime import timedelta\n    \n    maxAge = timedelta(days=7)\n    \n    # Assign new variables for clarity\n    fileHash = filtered_artifacts_item_1_0[0]\n    \n    phantom.debug(\"fileHash is {}\".format(fileHash))\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    phantom.debug(\"success: {}\".format(success))\n    phantom.debug(\"message: {}\".format(message))\n    phantom.debug(\"cache: {}\".format(cache))\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        phantom.debug(\"Entry {} in cache: {}\".format(entry, cache[entry]))\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))\n            \n            if date.today() - lastUpdated > maxAge:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
@@ -2403,7 +2403,7 @@
                         "customCodeEndLineOffset": 8,
                         "customCodeStartLine": 12,
                         "custom_callback": "",
-                        "custom_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = filtered_artifacts_item_1_0[0]\n    \n    phantom.debug(\"fileHash is {}\".format(fileHash))\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    phantom.debug(\"success: {}\".format(success))\n    phantom.debug(\"message: {}\".format(message))\n    phantom.debug(\"cache: {}\".format(cache))\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        phantom.debug(\"Entry {} in cache: {}\".format(entry, cache[entry]))\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
+                        "custom_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n\n    check_cache__cacheOperation = None\n    check_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    from datetime import timedelta\n    \n    maxAge = timedelta(days=7)\n    \n    # Assign new variables for clarity\n    fileHash = filtered_artifacts_item_1_0[0]\n    \n    phantom.debug(\"fileHash is {}\".format(fileHash))\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    phantom.debug(\"success: {}\".format(success))\n    phantom.debug(\"message: {}\".format(message))\n    phantom.debug(\"cache: {}\".format(cache))\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        phantom.debug(\"Entry {} in cache: {}\".format(entry, cache[entry]))\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))\n            \n            if date.today() - lastUpdated > maxAge:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))\n    decision_2(container=container)\n\n    return",
                         "custom_join": "",
                         "custom_name": "check cache",
                         "description": "",
@@ -2420,7 +2420,7 @@
                         "join_optional": [],
                         "join_start": 1,
                         "legacy": true,
-                        "line_end": 103,
+                        "line_end": 106,
                         "line_start": 32,
                         "message": "Configuring now",
                         "name": "custom function",
@@ -2516,7 +2516,7 @@
                         "status": "deprecating",
                         "title": "custom function",
                         "type": "coa.FunctionBlock",
-                        "userGeneratedCode": "\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = filtered_artifacts_item_1_0[0]\n    \n    phantom.debug(\"fileHash is {}\".format(fileHash))\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    phantom.debug(\"success: {}\".format(success))\n    phantom.debug(\"message: {}\".format(message))\n    phantom.debug(\"cache: {}\".format(cache))\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        phantom.debug(\"Entry {} in cache: {}\".format(entry, cache[entry]))\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n\n",
+                        "userGeneratedCode": "\n    from datetime import date\n    from datetime import timedelta\n    \n    maxAge = timedelta(days=7)\n    \n    # Assign new variables for clarity\n    fileHash = filtered_artifacts_item_1_0[0]\n    \n    phantom.debug(\"fileHash is {}\".format(fileHash))\n    \n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n    \n    # TODO put in error handling here if list can't be retrieved\n    phantom.debug(\"success: {}\".format(success))\n    phantom.debug(\"message: {}\".format(message))\n    phantom.debug(\"cache: {}\".format(cache))\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Default value indicates fileHash is not in the cache\n    cacheIndex = -1\n        \n    # Iterate through cache to search for fileHash\n    for entry in range(0, len(cache)):\n        phantom.debug(\"Entry {} in cache: {}\".format(entry, cache[entry]))\n        if cache[entry][0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = cache[entry][2].split(\"-\")\n            lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))\n            \n            if date.today() - lastUpdated > maxAge:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n                cacheIndex = entry\n                break\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n                cacheIndex = entry\n                break\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n    \n    # Return the location of the data in the cache\n    check_cache__cacheIndex = cacheIndex\n\n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n\n",
                         "warn": false,
                         "z": 73
                     }
@@ -2531,7 +2531,7 @@
         "schema": "4",
         "version": "5.2.1.78411"
     },
-    "create_time": "2022-03-05T22:34:41.020835+00:00",
+    "create_time": "2022-03-05T22:38:37.238625+00:00",
     "draft_mode": false,
     "labels": [
         "class"

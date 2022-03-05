@@ -43,6 +43,9 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     ################################################################################
 
     from datetime import date
+    from datetime import timedelta
+    
+    maxAge = timedelta(days=7)
     
     # Assign new variables for clarity
     fileHash = filtered_artifacts_item_1_0[0]
@@ -71,7 +74,7 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
             yearMonthDay = cache[entry][2].split("-")
             lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))
             
-            if date.today() - lastUpdated > 7:
+            if date.today() - lastUpdated > maxAge:
                 # Cached info is older than 7 days and needs to be updated
                 cacheOperation = "update"
                 cacheIndex = entry
