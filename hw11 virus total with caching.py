@@ -107,7 +107,7 @@ def decision_2(action=None, success=None, container=None, results=None, handle=N
     matched = phantom.decision(
         container=container,
         conditions=[
-            ["check_cache:custom_function:cacheOperation", "==", "\"read\""],
+            ["check_cache:custom_function:cacheOperation", "==", "read"],
         ])
 
     # call connected blocks if condition 1 matched
