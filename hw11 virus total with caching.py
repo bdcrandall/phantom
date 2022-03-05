@@ -216,6 +216,8 @@ def update_cache(action=None, success=None, container=None, results=None, handle
     
     phantom.debug("cache at start is: {}".format(cache))
     
+    phantom.debug("cacheOperation: {}, cacheIndex: {}".format(cacheOperation, cacheIndex))
+    
     if cacheOperation == "add":
         # Create cache entry from VT results
         newEntry = []
@@ -224,8 +226,8 @@ def update_cache(action=None, success=None, container=None, results=None, handle
         newEntry.append(fileLastAnalyzed)
         newEntry.append(fileReputation)
         newEntry.append(date.today().isoformat())
-        # Set counter tracking lookups to 1
-        newEntry.append(1)
+        # Set counter tracking lookups to 0
+        newEntry.append(0)
         # Add entry to cache
         cache.append(newEntry)
         cacheIndex = len(cache) - 1
@@ -234,8 +236,9 @@ def update_cache(action=None, success=None, container=None, results=None, handle
         cache[cacheIndex][2] = fileLastAnalyzed
         cache[cacheIndex][3] = fileReputation
         cache[cacheIndex][4] = date.today().isoformat()
-        # Increment counter tracking number of times we've looked up this file hash
-        cache[cacheIndex][5] = cache[cacheIndex][5] + 1
+    
+    # Increment counter tracking number of times we've looked up this file hash
+    cache[cacheIndex][5] = cache[cacheIndex][5] + 1
     
     # Pull results from cache list and update container
     message = "filehash: {0}, fileName: {1}, lastAnalyzed: {2}, malicous: {3}, updated: {4}, lookupCount: {5}".format(
