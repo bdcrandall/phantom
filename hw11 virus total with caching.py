@@ -238,7 +238,7 @@ def update_cache(action=None, success=None, container=None, results=None, handle
         cache[cacheIndex][4] = date.today().isoformat()
     
     # Increment counter tracking number of times we've looked up this file hash
-    cache[cacheIndex][5] = cache[cacheIndex][5] + 1
+    cache[cacheIndex][5] = str(int(cache[cacheIndex][5]) + 1)
     
     # Pull results from cache list and update container
     message = "filehash: {0}, fileName: {1}, lastAnalyzed: {2}, malicous: {3}, updated: {4}, lookupCount: {5}".format(
