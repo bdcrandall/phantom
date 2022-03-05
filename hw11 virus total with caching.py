@@ -214,6 +214,8 @@ def update_cache(action=None, success=None, container=None, results=None, handle
 
     # TODO put in error handling here if list can't be retrieved
     
+    phantom.debug("cache at start is: {}".format(cache))
+    
     if cacheOperation == "add":
         # Create cache entry from VT results
         newEntry = []
@@ -245,6 +247,10 @@ def update_cache(action=None, success=None, container=None, results=None, handle
         cache[cacheIndex][5]
     )
     phantom.add_note(note_type="general", title="VT Cache Results", content=message)
+
+    phantom.debug("cache at end is: {}".format(cache))
+
+    phantom.set_list(cache)
 
     # TODO set color and criticality
 
