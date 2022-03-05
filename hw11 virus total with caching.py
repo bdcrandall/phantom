@@ -47,10 +47,15 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     # Assign new variables for clarity
     fileHash = container_item_0
     
+    phantom.debug("fileHash is {}".format(fileHash))
+    
     # Retrieve list containing cache
     success, message, cache = phantom.get_list("virus_total_cache")
     
     # TODO put in error handling here if list can't be retrieved
+    phantom.debug("success: {}".format(success))
+    phantom.debug("message: {}".format(message))
+    phantom.debug("cache: {}".format(cache))
     
     # Default operation is to look up info and add it to cache
     cacheOperation = "add"
