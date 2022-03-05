@@ -36,6 +36,7 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     container_item_0 = [item[0] for item in container_data]
 
     check_cache__cacheOperation = None
+    check_cache__cacheIndex = None
 
     ################################################################################
     ## Custom Code Start
@@ -52,28 +53,39 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     # Default operation is to look up info and add it to cache
     cacheOperation = "add"
     
+    # Default value indicates fileHash is not in the cache
+    cacheIndex = -1
+        
     # Iterate through cache to search for fileHash
-    for entry in cache:
-        if entry[0] == fileHash:
+    for entry in range(0, len(cache)):
+        if cache[entry][0] == fileHash:
             # Convert string to date object
-            yearMonthDay = entry[2].split("-")
+            yearMonthDay = cache[entry][2].split("-")
             lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])
             
             if date.today() - lastUpdated > 7:
                 # Cached info is older than 7 days and needs to be updated
                 cacheOperation = "update"
+                cacheIndex = entry
+                break
             else:
                 # Cached info is current so just read it
                 cacheOperation = "read"
+                cacheIndex = entry
+                break
     
     # Return the operation the rest of the playbook will perform
     check_cache__cacheOperation = cacheOperation
+    
+    # Return the location of the data in the cache
+    check_cache__cacheIndex = cacheIndex
 
     ################################################################################
     ## Custom Code End
     ################################################################################
 
     phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))
+    phantom.save_run_data(key='check_cache:cacheIndex', value=json.dumps(check_cache__cacheIndex))
     decision_2(container=container)
 
     return
@@ -126,7 +138,7 @@ def no_op_1(action=None, success=None, container=None, results=None, handle=None
 
     parameters = []
 
-    phantom.act(action="no op", parameters=parameters, callback=update_reputation_from_cache, name="no_op_1")
+    phantom.act(action="no op", parameters=parameters, callback=update_cache, name="no_op_1")
 
     return
 
@@ -144,30 +156,77 @@ def join_no_op_1(action=None, success=None, container=None, results=None, handle
     
     return
 
-def update_reputation_from_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug('update_reputation_from_cache() called')
+"""
+processes any updates to the cache and returns the file reputation of the hash
+"""
+def update_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug('update_cache() called')
     
     check_cache__cacheOperation = json.loads(phantom.get_run_data(key='check_cache:cacheOperation'))
-    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation:action_result.data.*.attributes.last_analysis_stats.malicious'], action_results=results)
+    check_cache__cacheIndex = json.loads(phantom.get_run_data(key='check_cache:cacheIndex'))
+    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation:action_result.summary.malicious', 'file_reputation:action_result.data.*.attributes.meaningful_name', 'file_reputation:action_result.data.*.attributes.last_analysis_date'], action_results=results)
     filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])
     filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]
     results_item_1_0 = [item[0] for item in results_data_1]
+    results_item_1_1 = [item[1] for item in results_data_1]
+    results_item_1_2 = [item[2] for item in results_data_1]
 
     ################################################################################
     ## Custom Code Start
     ################################################################################
 
+    from datetime import date
+
+    # Cache Structure
+    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0
+    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1
+    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2
+    # ...
+    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n
+
     # Use variable names that are easier to follow
-    cache_operation = check_cache__cacheOperation
+    cacheOperation = check_cache__cacheOperation
+    cacheIndex = check_cache__cacheIndex
+    fileHash = filtered_artifacts_item_1_0
+    fileName = results_item_1_1
+    fileReputation = results_item_1_0
+    fileLastAnalyzed = results_item_1_2
+
+    # Retrieve list containing cache
+    cache = phantom.get_list("virus_total_cache")
+
+    if cacheOperation == "add":
+        # Add VT results to cache
+        newEntry = []
+        newEntry[0] = fileHash
+        newEntry[1] = fileName
+        newEntry[2] = fileLastAnalyzed
+        newEntry[3] = fileReputation
+        newEntry[4] = date.today().isoformat()
+        # Set counter tracking lookups to 1
+        newEntry[5] = 1
+        cache.append(newEntry)
+        cacheIndex = len(cache) - 1
+    elif cacheOperation == "update":
+        # Update cache with latest results from VT
+        cache[cacheIndex][2] = fileLastAnalyzed
+        cache[cacheIndex][3] = fileReputation
+        cache[cacheIndex][4] = date.today().isoformat()
+        # Increment counter tracking number of times we've looked up this file hash
+        cache[cacheIndex][5] = cache[cacheIndex][5] + 1
     
-    # if cache_operation == "add"
-        # insert VT results into cache list
-    # elsif cache_operation == "update"
-        # pull row from list
-        # update contents
-        # store back into cache list
-    
-    # pull results from cache list and update container
+    # Pull results from cache list and update container
+    message = "filehash: {0}, fileName: {1}, lastAnalyzed: {2}, malicous: {3}, updated: {4}, lookupCount: {5}".format(
+        cache[cacheIndex][0],
+        cache[cacheIndex][1],
+        cache[cacheIndex][2],
+        cache[cacheIndex][3],
+        cache[cacheIndex][4],
+        cache[cacheIndex][5]
+    )
+    phantom.add_note(note_type="general", title="VT Cache Results", content=message)
+
+    # TODO set color and criticality
 
     ################################################################################
     ## Custom Code End
