@@ -68,7 +68,7 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     for entry in range(0, len(cache)):
         if cache[entry][0] == fileHash:
             # Convert string to date object
-            yearMonthDay = cache[entry][2].split("-")
+            yearMonthDay = cache[entry][4].split("-")
             lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))
             
             if date.today() - lastUpdated > maxAge:
