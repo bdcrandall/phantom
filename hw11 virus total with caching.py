@@ -65,6 +65,7 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
         
     # Iterate through cache to search for fileHash
     for entry in range(0, len(cache)):
+        phantom.debug("Entry {} in cache: {}".format(entry, cache[entry]))
         if cache[entry][0] == fileHash:
             # Convert string to date object
             yearMonthDay = cache[entry][2].split("-")
