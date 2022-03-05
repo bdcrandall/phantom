@@ -1,0 +1,2418 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "clean": true,
+            "code_block": "",
+            "description": "",
+            "hash": "ab874372d6ffbb4e370eb224f1d00cfdbf2bfb98",
+            "joint": {
+                "cells": [
+                    {
+                        "0": "S",
+                        "1": "T",
+                        "2": "A",
+                        "3": "R",
+                        "4": "T",
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "ref-x": 33,
+                                "ref-y": 8,
+                                "text": "START"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.icon image": {
+                                "ref-x": 13,
+                                "xlink:href": "/inc/coa/img/block_icon_start.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            }
+                        },
+                        "block_code": "def on_start(container):\n    phantom.debug('on_start() called')\n    \n    # call 'filter_1' block\n    filter_1(container=container)\n\n    return",
+                        "callback_code": "# read-only block view not available",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "description": "",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "7e534c08-4680-48b7-b599-fbc8ce9e87af",
+                        "inPorts": [],
+                        "join_code": "# read-only block view not available",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "line_end": 15,
+                        "line_start": 7,
+                        "name": "",
+                        "notes": "",
+                        "number": 0,
+                        "order": 1,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 100,
+                            "y": 100
+                        },
+                        "previous_function": "",
+                        "previous_name": "",
+                        "show_number": true,
+                        "size": {
+                            "height": 54,
+                            "width": 80
+                        },
+                        "status": "",
+                        "title": "START",
+                        "type": "coa.StartEnd",
+                        "warn": false,
+                        "z": 1
+                    },
+                    {
+                        "0": "E",
+                        "1": "N",
+                        "2": "D",
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".title": {
+                                "text": "END"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.icon image": {
+                                "xlink:href": "/inc/coa/img/block_icon_end.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            }
+                        },
+                        "block_code": "def on_finish(container, summary):\n    phantom.debug('on_finish() called')\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n    return",
+                        "callback_code": "# read-only block view not available",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "no op",
+                        "connection_type": "action",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "description": "",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "77e5d9bc-e72f-4f14-91ac-75f4cea94e12",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "# read-only block view not available",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "line_end": 191,
+                        "line_start": 178,
+                        "name": "",
+                        "notes": "",
+                        "number": 0,
+                        "order": 8,
+                        "outPorts": [],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 1480,
+                            "y": 100
+                        },
+                        "previous_function": "",
+                        "previous_name": "",
+                        "show_number": true,
+                        "size": {
+                            "height": 54,
+                            "width": 80
+                        },
+                        "status": "",
+                        "title": "END",
+                        "type": "coa.StartEnd",
+                        "warn": false,
+                        "z": 2
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "258c8192-6846-4222-bb5d-d2056cdc43e8",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "7e534c08-4680-48b7-b599-fbc8ce9e87af",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "627cc413-b8a0-4734-a326-621a7ce6500c",
+                            "selector": ".port-body[type=\"input\"]"
+                        },
+                        "type": "link",
+                        "z": 3
+                    },
+                    {
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773",
+                                "transform": "rotate(45 30 70)"
+                            },
+                            ".inPorts>.port-0>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".number": {
+                                "text": 1
+                            },
+                            ".outPorts>.port-0": {
+                                "port": {
+                                    "id": "out-1",
+                                    "type": "out"
+                                },
+                                "ref-x": 83,
+                                "ref-y": 40
+                            },
+                            ".outPorts>.port-0>.port-body": {
+                                "port": {
+                                    "id": "out-1",
+                                    "type": "out"
+                                }
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def filter_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('filter_1() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.fileHash\", \"!=\", \"\"],\n        ],\n        name=\"filter_1:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        check_cache(action=action, success=success, container=container, results=results, handle=handle, custom_function=custom_function, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "description": "",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "627cc413-b8a0-4734-a326-621a7ce6500c",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "line_end": 32,
+                        "line_start": 15,
+                        "name": "filter",
+                        "notes": "",
+                        "number": 1,
+                        "order": 2,
+                        "outPorts": [
+                            "out-1"
+                        ],
+                        "outputs": [
+                            {
+                                "conditions": [
+                                    {
+                                        "comparison": "!=",
+                                        "data_type": "",
+                                        "param": "artifact:*.cef.fileHash",
+                                        "value": ""
+                                    }
+                                ],
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            }
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 240,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "filter_1",
+                        "show_number": true,
+                        "size": {
+                            "height": 82,
+                            "width": 82
+                        },
+                        "state": "filter",
+                        "status": "",
+                        "type": "coa.Filter",
+                        "warn": false,
+                        "z": 5
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "54cf25b8-98a6-4d96-a479-c2a18d5d2748",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "627cc413-b8a0-4734-a326-621a7ce6500c",
+                            "port": "out-1",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "87330892-33a1-4df3-926c-ae04d2ee1b92",
+                            "selector": ".port-body[type=\"input\"]"
+                        },
+                        "type": "link",
+                        "z": 6
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "ac298a82-b513-4176-bd70-c7351c847dac",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "87330892-33a1-4df3-926c-ae04d2ee1b92",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "dde556b4-daa8-4c1b-813f-ca786a1eff94",
+                            "selector": ".port-body[type=\"input\"]"
+                        },
+                        "type": "link",
+                        "z": 10
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "c08f7512-b6bc-49d2-a2b4-49e320ba70f0",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "473c9199-03e3-4477-824a-bad31592bee8",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "20a8fc98-152e-4c1e-866f-4a54a44f302f",
+                            "selector": ".port-body[type=\"input\"]"
+                        },
+                        "type": "link",
+                        "z": 19
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "313a6f89-0bf4-4d09-9d4b-0fb05301037d",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "20a8fc98-152e-4c1e-866f-4a54a44f302f",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "77e5d9bc-e72f-4f14-91ac-75f4cea94e12",
+                            "selector": "> g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 21
+                    },
+                    {
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#637282",
+                                "transform": "rotate(45 30 70)"
+                            },
+                            ".inPorts>.port-0>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".number": {
+                                "text": 2
+                            },
+                            ".outPorts>.port-0": {
+                                "port": {
+                                    "id": "out-1",
+                                    "type": "out"
+                                },
+                                "ref-x": 83,
+                                "ref-y": 40
+                            },
+                            ".outPorts>.port-0>.port-body": {
+                                "port": {
+                                    "id": "out-1",
+                                    "type": "out"
+                                }
+                            },
+                            ".outPorts>.port-1": {
+                                "port": {
+                                    "id": "out-2",
+                                    "type": "out"
+                                },
+                                "ref-x": 41,
+                                "ref-y": 82
+                            },
+                            ".outPorts>.port-1>.port-body": {
+                                "port": {
+                                    "id": "out-2",
+                                    "type": "out"
+                                }
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def decision_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('decision_2() called')\n\n    # check for 'if' condition 1\n    matched = phantom.decision(\n        container=container,\n        conditions=[\n            [\"check_cache:custom_function:cacheOperation\", \"==\", \"read\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched:\n        join_no_op_1(action=action, success=success, container=container, results=results, handle=handle, custom_function=custom_function)\n        return\n\n    # call connected blocks for 'else' condition 2\n    file_reputation(action=action, success=success, container=container, results=results, handle=handle, custom_function=custom_function)\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "description": "",
+                        "hasElse": true,
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "dde556b4-daa8-4c1b-813f-ca786a1eff94",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "line_end": 101,
+                        "line_start": 81,
+                        "name": "decision",
+                        "notes": "",
+                        "number": 2,
+                        "order": 4,
+                        "outPorts": [
+                            "out-1",
+                            "out-2"
+                        ],
+                        "outputs": [
+                            {
+                                "conditions": [
+                                    {
+                                        "comparison": "==",
+                                        "data_type": "",
+                                        "param": "check_cache:custom_function:cacheOperation",
+                                        "value": "read"
+                                    }
+                                ],
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "comparison": "==",
+                                        "data_type": "",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 620,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "decision_2",
+                        "show_number": true,
+                        "size": {
+                            "height": 82,
+                            "width": 82
+                        },
+                        "state": "decision",
+                        "status": "",
+                        "type": "coa.Decision",
+                        "warn": "",
+                        "z": 28
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "c629e8d8-b647-41af-95b2-0229e5d8876f",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "dde556b4-daa8-4c1b-813f-ca786a1eff94",
+                            "port": "out-1",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "473c9199-03e3-4477-824a-bad31592bee8",
+                            "selector": "> g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 30
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "4ce12f7d-77e9-47b1-a0f6-64282b8abffc",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "dde556b4-daa8-4c1b-813f-ca786a1eff94",
+                            "port": "out-2",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(2) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "b66a5791-d4b5-4453-88dd-9212632704df",
+                            "selector": "> g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 31
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "f84c177b-196b-4f01-b0ca-f0ea7962b6ae",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "b66a5791-d4b5-4453-88dd-9212632704df",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "473c9199-03e3-4477-824a-bad31592bee8",
+                            "selector": "> g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 32
+                    },
+                    {
+                        "action": "file reputation",
+                        "action_type": "investigate",
+                        "active": false,
+                        "active_keys": {},
+                        "active_values": {
+                            "hash": "filtered-data:filter_1:condition_1:artifact:*.cef.fileHash"
+                        },
+                        "angle": 0,
+                        "app": "VirusTotal v3",
+                        "appid": "3fe4875d-a4a7-47d3-9ef1-f9e63a6653a4",
+                        "approver": "",
+                        "assets": [
+                            {
+                                "action": "file reputation",
+                                "actions": [
+                                    "get report",
+                                    "detonate file",
+                                    "detonate url",
+                                    "url reputation",
+                                    "ip reputation",
+                                    "get file",
+                                    "file reputation",
+                                    "domain reputation",
+                                    "test connectivity"
+                                ],
+                                "active": true,
+                                "app_name": "VirusTotal v3",
+                                "app_version": "1.2.10",
+                                "appid": "3fe4875d-a4a7-47d3-9ef1-f9e63a6653a4",
+                                "asset_name": "virustotal",
+                                "config_type": "asset",
+                                "count": 0,
+                                "fields": {
+                                    "hash": "filtered-data:filter_1:condition_1:artifact:*.cef.fileHash"
+                                },
+                                "has_app": true,
+                                "id": 7,
+                                "loaded": false,
+                                "missing": false,
+                                "name": "virustotal",
+                                "output": [
+                                    {
+                                        "data_path": "action_result.status",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "success",
+                                            "failed"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "Hash",
+                                        "column_order": 0,
+                                        "contains": [
+                                            "hash",
+                                            "sha256",
+                                            "sha1",
+                                            "md5"
+                                        ],
+                                        "data_path": "action_result.parameter.hash",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "e87051ea8e1bb3c986c0f0bda85352f63e67e0315c58e461a075b5fb7229e6fe"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.authentihash",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "ad56160b465f7bd1e7568640397f01fc4f8819ce6f0c1415690ecee646464cec"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.creation_date",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1410950077
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.first_submission_date",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1612961082
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_date",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1613635130
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_results.*.category",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "undetected"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_results.*.engine_name",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "CMC"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_results.*.engine_update",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "20210218"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_results.*.engine_version",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "2.10.2019.1"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_results.*.method",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "blacklist"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_results.*.result",
+                                        "data_type": "string"
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_stats.confirmed-timeout",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_stats.failure",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_stats.harmless",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_stats.malicious",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_stats.suspicious",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_stats.timeout",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_stats.type-unsupported",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            16
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_analysis_stats.undetected",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            59
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_modification_date",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1613635210
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.last_submission_date",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1613635130
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "File Description",
+                                        "column_order": 2,
+                                        "data_path": "action_result.data.*.attributes.magic",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "a python2.7\\015script text executable"
+                                        ]
+                                    },
+                                    {
+                                        "contains": [
+                                            "md5"
+                                        ],
+                                        "data_path": "action_result.data.*.attributes.md5",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "2e65153f2c49c91a0206ee7a8c00e659"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.meaningful_name",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "update_cr.py"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.names",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "update_cr.py"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.entry_point",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            14768
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.imphash",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "d7584447a5c5ca9b4a55946317137951"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.import_list.*.library_name",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "COMDLG32.dll"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.machine_type",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            332
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_details.*.chi2",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            8137.34814453125
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_details.*.entropy",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            5.789552211761475
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_details.*.filetype",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "Data"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_details.*.lang",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "ENGLISH US"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_details.*.sha256",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "c37bc8f6dbf81e8d88978836b23ee932ade6652ba798989bf20697afffd6113e"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_details.*.type",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "RT_BITMAP"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_langs.ENGLISH US",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            6
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_langs.RUSSIAN",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_types.RT_BITMAP",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            2
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_types.RT_DIALOG",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            2
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_types.RT_MANIFEST",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_types.RT_MENU",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.resource_types.RT_VERSION",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.rich_pe_header_hash",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "fa4dbca9180170710b3c245464efa483"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.sections.*.chi2",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            292981.44
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.sections.*.entropy",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            6.75
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.sections.*.flags",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "rx"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.sections.*.md5",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "a13f88c3e0636712e10326c07d56b645"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.sections.*.name",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            ".text"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.sections.*.raw_size",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            54784
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.sections.*.virtual_address",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            4096
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.sections.*.virtual_size",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            54434
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.pe_info.timestamp",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1410950077
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.popular_threat_classification.popular_threat_category.*.count",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            30
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.popular_threat_classification.popular_threat_category.*.value",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "trojan"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.popular_threat_classification.popular_threat_name.*.count",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            13
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.popular_threat_classification.popular_threat_name.*.value",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "zbot"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.popular_threat_classification.suggested_threat_label",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "trojan.zbot/foreign"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.reputation",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.sandbox_verdicts.Tencent HABO.*",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "xyz"
+                                        ]
+                                    },
+                                    {
+                                        "contains": [
+                                            "sha1"
+                                        ],
+                                        "data_path": "action_result.data.*.attributes.sha1",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "6802169a19142292710254cde97df84e46dfe33a"
+                                        ]
+                                    },
+                                    {
+                                        "contains": [
+                                            "sha256"
+                                        ],
+                                        "data_path": "action_result.data.*.attributes.sha256",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "e87051ea8e1bb3c986c0f0bda85352f63e67e0315c58e461a075b5fb7229e6fe"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.signature_info.*",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "xyz"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "Size",
+                                        "column_order": 1,
+                                        "data_path": "action_result.data.*.attributes.size",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            6285
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.ssdeep",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "192:MPv2vv/ybXAhgPpyN3ipdw0fRAdygi6OLxgUHzYu7ThPBLkv:pq7Mgg0/NdMu/1BLkv"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.tags",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "python"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.times_submitted",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            13
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.tlsh",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "T1F7D10E05AC5E941C47329D1EDD16FD1BEB0122B724296327B46CA2997FB0468C3E14FC"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.total_votes.harmless",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.total_votes.malicious",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.trid.*.file_type",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "Unix-like shebang (var.1) (gen)"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.trid.*.probability",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            100
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.type_description",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "Python"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "File Extension",
+                                        "column_order": 3,
+                                        "data_path": "action_result.data.*.attributes.type_extension",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "py"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.type_tag",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "python"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.unique_sources",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.attributes.vhash",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "025056657d755510804011z9005b9z25z12z3afz"
+                                        ]
+                                    },
+                                    {
+                                        "contains": [
+                                            "sha256"
+                                        ],
+                                        "data_path": "action_result.data.*.id",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "e87051ea8e1bb3c986c0f0bda85352f63e67e0315c58e461a075b5fb7229e6fe"
+                                        ]
+                                    },
+                                    {
+                                        "contains": [
+                                            "url"
+                                        ],
+                                        "data_path": "action_result.data.*.links.self",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "https://www.virustotal.com/api/v3/files/e87051ea8e1bb3c986c0f0bda85352f63e67e0315c58e461a075b5fb7229e6fe"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.type",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "file"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.harmless",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.malicious",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.suspicious",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.undetected",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            59
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.message",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "Harmless: 0, Malicious: 0, Suspicious: 0, Undetected: 59"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "summary.total_objects",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "summary.total_objects_successful",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    }
+                                ],
+                                "parameters": {
+                                    "hash": {
+                                        "contains": [
+                                            "hash",
+                                            "sha256",
+                                            "sha1",
+                                            "md5"
+                                        ],
+                                        "data_type": "string",
+                                        "default": null,
+                                        "description": "File hash to query",
+                                        "key": "hash",
+                                        "order": 0,
+                                        "primary": true,
+                                        "required": true
+                                    }
+                                },
+                                "product_name": "VirusTotal v3",
+                                "product_vendor": "VirusTotal",
+                                "targets": "7",
+                                "type": "reputation"
+                            }
+                        ],
+                        "attrs": {
+                            ".action": {
+                                "text": "file reputation"
+                            },
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "Investigate"
+                            },
+                            "g.approver image": {
+                                "opacity": 1
+                            },
+                            "g.code image": {
+                                "opacity": 1
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn.svg"
+                            },
+                            "g.icon image": {
+                                "xlink:href": "/inc/coa/img/block_icon_investigate.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            },
+                            "g.timer image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def file_reputation(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('file_reputation() called')\n\n    # collect data for 'file_reputation' call\n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash', 'filtered-data:filter_1:condition_1:artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'file_reputation' call\n    for filtered_artifacts_item_1 in filtered_artifacts_data_1:\n        if filtered_artifacts_item_1[0]:\n            parameters.append({\n                'hash': filtered_artifacts_item_1[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': filtered_artifacts_item_1[1]},\n            })\n\n    phantom.act(action=\"file reputation\", parameters=parameters, assets=['virustotal'], callback=join_no_op_1, name=\"file_reputation\")\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": true,
+                        "color": "",
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "file reputation",
+                        "delay": 0,
+                        "description": "",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "b66a5791-d4b5-4453-88dd-9212632704df",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "line_end": 122,
+                        "line_start": 101,
+                        "message": "Configuring now",
+                        "name": "file reputation",
+                        "notes": "",
+                        "number": 1,
+                        "order": 5,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 700,
+                            "y": 160
+                        },
+                        "previous_function": "",
+                        "previous_name": "file_reputation",
+                        "required_params": {
+                            "hash": true
+                        },
+                        "reviewer": "",
+                        "show_number": false,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "app_action_assets",
+                        "status": "",
+                        "title": "Investigate",
+                        "type": "coa.Action",
+                        "warn": false,
+                        "z": 34
+                    },
+                    {
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".functionBlock": {
+                                "text": "update reputation from c..."
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "custom function"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 1
+                            },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn_grey.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def update_reputation_from_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('update_reputation_from_cache() called')\n    \n    check_cache__cacheOperation = json.loads(phantom.get_run_data(key='check_cache:cacheOperation'))\n    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation:action_result.data.*.attributes.last_analysis_stats.malicious'], action_results=results)\n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n    results_item_1_0 = [item[0] for item in results_data_1]\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    # Use variable names that are easier to follow\n    cache_operation = check_cache__cacheOperation\n    \n    # if cache_operation == \"add\"\n        # insert VT results into cache list\n    # elsif cache_operation == \"update\"\n        # pull row from list\n        # update contents\n        # store back into cache list\n    \n    # pull results from cache list and update container\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "no op",
+                        "connection_type": "action",
+                        "customCodeEndLineOffset": 4,
+                        "customCodeStartLine": 12,
+                        "custom_callback": "",
+                        "custom_code": "def update_reputation_from_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('update_reputation_from_cache() called')\n    \n    check_cache__cacheOperation = json.loads(phantom.get_run_data(key='check_cache:cacheOperation'))\n    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation:action_result.data.*.attributes.last_analysis_stats.malicious'], action_results=results)\n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n    results_item_1_0 = [item[0] for item in results_data_1]\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    # Use variable names that are easier to follow\n    cache_operation = check_cache__cacheOperation\n    \n    # if cache_operation == \"add\"\n        # insert VT results into cache list\n    # elsif cache_operation == \"update\"\n        # pull row from list\n        # update contents\n        # store back into cache list\n    \n    # pull results from cache list and update container\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    return",
+                        "custom_join": "",
+                        "custom_name": "update reputation from cache",
+                        "description": "",
+                        "functionBlock": "custom function",
+                        "has_custom": true,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "20a8fc98-152e-4c1e-866f-4a54a44f302f",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "legacy": true,
+                        "line_end": 178,
+                        "line_start": 147,
+                        "message": "Configuring now",
+                        "name": "custom function",
+                        "notes": "",
+                        "number": 2,
+                        "order": 7,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "outputVariables": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": ""
+                            }
+                        ],
+                        "parameters": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "filtered-data:filter_1:condition_1:artifact:*.cef.fileHash"
+                            },
+                            {
+                                "position": 1,
+                                "type": "",
+                                "value": "check_cache:custom_function:cacheOperation"
+                            },
+                            {
+                                "position": 2,
+                                "type": "",
+                                "value": "file_reputation:action_result.data.*.attributes.last_analysis_stats.malicious"
+                            }
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 1200,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "update_reputation_from_cache",
+                        "show_number": true,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "custom function",
+                        "status": "deprecating",
+                        "title": "custom function",
+                        "type": "coa.FunctionBlock",
+                        "userGeneratedCode": "\n    # Use variable names that are easier to follow\n    cache_operation = check_cache__cacheOperation\n    \n    # if cache_operation == \"add\"\n        # insert VT results into cache list\n    # elsif cache_operation == \"update\"\n        # pull row from list\n        # update contents\n        # store back into cache list\n    \n    # pull results from cache list and update container\n\n",
+                        "warn": false,
+                        "z": 37
+                    },
+                    {
+                        "action": "no op",
+                        "action_type": "investigate",
+                        "active": false,
+                        "active_keys": {},
+                        "active_values": {},
+                        "angle": 0,
+                        "app": "Phantom",
+                        "appid": "deb82aa9-22cc-4675-9cf1-534b8d006eb7",
+                        "approver": "",
+                        "assets": [],
+                        "attrs": {
+                            ".action": {
+                                "text": "no op"
+                            },
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#E6984E"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "Investigate"
+                            },
+                            "g.approver image": {
+                                "opacity": 1
+                            },
+                            "g.code image": {
+                                "opacity": 1
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 1
+                            },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn.svg"
+                            },
+                            "g.icon image": {
+                                "xlink:href": "/inc/coa/img/block_icon_investigate.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            },
+                            "g.timer image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def no_op_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('no_op_1() called')\n        \n    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))\n\n    parameters = []\n\n    phantom.act(action=\"no op\", parameters=parameters, callback=update_reputation_from_cache, name=\"no_op_1\")\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": true,
+                        "color": "",
+                        "connected_to_start": true,
+                        "connection_name": "file reputation",
+                        "connection_type": "action",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "delay": 0,
+                        "description": "",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "473c9199-03e3-4477-824a-bad31592bee8",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "def join_no_op_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None):\n    phantom.debug('join_no_op_1() called')\n    \n    # if the joined function has already been called, do nothing\n    if phantom.get_run_data(key='join_no_op_1_called'):\n        return\n\n    # no callbacks to check, call connected block \"no_op_1\"\n    phantom.save_run_data(key='join_no_op_1_called', value='no_op_1', auto=True)\n\n    no_op_1(container=container, handle=handle)\n    \n    return",
+                        "join_optional": [
+                            "file_reputation"
+                        ],
+                        "join_start": 133,
+                        "line_end": 147,
+                        "line_start": 122,
+                        "message": "Configuring now",
+                        "name": "no op",
+                        "notes": "",
+                        "number": 1,
+                        "order": 6,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 960,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "no_op_1",
+                        "required_params": {},
+                        "reviewer": "",
+                        "show_number": false,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "app_action_assets",
+                        "status": "warn",
+                        "title": "Investigate",
+                        "type": "coa.Action",
+                        "warn": false,
+                        "z": 40
+                    },
+                    {
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".functionBlock": {
+                                "text": "check cache"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "custom function"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 1
+                            },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn_grey.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    cache = phantom.get_list(\"virus_total_cache\")\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Iterate through cache to search for fileHash\n    for entry in cache:\n        if entry[0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = entry[2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    decision_2(container=container)\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "customCodeEndLineOffset": 7,
+                        "customCodeStartLine": 11,
+                        "custom_callback": "",
+                        "custom_code": "def check_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('check_cache() called')\n    \n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHash', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    check_cache__cacheOperation = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    cache = phantom.get_list(\"virus_total_cache\")\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Iterate through cache to search for fileHash\n    for entry in cache:\n        if entry[0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = entry[2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='check_cache:cacheOperation', value=json.dumps(check_cache__cacheOperation))\n    decision_2(container=container)\n\n    return",
+                        "custom_join": "",
+                        "custom_name": "check cache",
+                        "description": "",
+                        "functionBlock": "custom function",
+                        "has_custom": true,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "87330892-33a1-4df3-926c-ae04d2ee1b92",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "legacy": true,
+                        "line_end": 81,
+                        "line_start": 32,
+                        "message": "Configuring now",
+                        "name": "custom function",
+                        "notes": "",
+                        "number": 1,
+                        "order": 3,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "outputVariables": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "cacheOperation"
+                            }
+                        ],
+                        "parameters": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "artifact:*.cef.fileHash"
+                            }
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 380,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "check_cache",
+                        "show_number": true,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "custom function",
+                        "status": "deprecating",
+                        "title": "custom function",
+                        "type": "coa.FunctionBlock",
+                        "userGeneratedCode": "\n    from datetime import date\n    \n    # Assign new variables for clarity\n    fileHash = container_item_0\n    \n    # Retrieve list containing cache\n    cache = phantom.get_list(\"virus_total_cache\")\n    \n    # Default operation is to look up info and add it to cache\n    cacheOperation = \"add\"\n    \n    # Iterate through cache to search for fileHash\n    for entry in cache:\n        if entry[0] == fileHash:\n            # Convert string to date object\n            yearMonthDay = entry[2].split(\"-\")\n            lastUpdated = date(yearMonthDay[0],yearMonthDay[1],yearMonthDay[2])\n            \n            if date.today() - lastUpdated > 7:\n                # Cached info is older than 7 days and needs to be updated\n                cacheOperation = \"update\"\n            else:\n                # Cached info is current so just read it\n                cacheOperation = \"read\"\n    \n    # Return the operation the rest of the playbook will perform\n    check_cache__cacheOperation = cacheOperation\n\n",
+                        "warn": false,
+                        "z": 41
+                    }
+                ]
+            },
+            "notes": ""
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "4",
+        "version": "5.2.1.78411"
+    },
+    "create_time": "2022-03-05T15:05:52.491442+00:00",
+    "draft_mode": false,
+    "labels": [
+        "class"
+    ],
+    "tags": []
+}
