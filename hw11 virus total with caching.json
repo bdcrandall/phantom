@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "",
-            "hash": "45630818470017ae21c6bbf38618b2f3c0a4fb22",
+            "hash": "042af7c1b5bc94d7928fdf32546da4d79e31e38f",
             "joint": {
                 "cells": [
                     {
@@ -217,12 +217,12 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 284,
-                        "line_start": 271,
+                        "line_end": 324,
+                        "line_start": 311,
                         "name": "",
                         "notes": "",
                         "number": 0,
-                        "order": 8,
+                        "order": 9,
                         "outPorts": [],
                         "ports": {
                             "groups": {
@@ -277,7 +277,7 @@
                             }
                         },
                         "position": {
-                            "x": 1440,
+                            "x": 1680,
                             "y": 100
                         },
                         "previous_function": "",
@@ -449,45 +449,6 @@
                         },
                         "type": "link",
                         "z": 19
-                    },
-                    {
-                        "attrs": {
-                            ".connection": {
-                                "stroke": "#818D99",
-                                "stroke-width": 2
-                            },
-                            ".marker-target": {
-                                "d": "M 10 0 L 0 5 L 10 10 z",
-                                "fill": "#818D99",
-                                "stroke": "#818D99"
-                            }
-                        },
-                        "connector": {
-                            "args": {
-                                "radius": 5
-                            },
-                            "name": "rounded"
-                        },
-                        "endDirections": [
-                            "left"
-                        ],
-                        "id": "313a6f89-0bf4-4d09-9d4b-0fb05301037d",
-                        "router": {
-                            "name": "metro"
-                        },
-                        "source": {
-                            "id": "20a8fc98-152e-4c1e-866f-4a54a44f302f",
-                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "startDirections": [
-                            "right"
-                        ],
-                        "target": {
-                            "id": "77e5d9bc-e72f-4f14-91ac-75f4cea94e12",
-                            "selector": "> g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "type": "link",
-                        "z": 21
                     },
                     {
                         "attrs": {
@@ -897,212 +858,6 @@
                         "type": "coa.Action",
                         "warn": false,
                         "z": 70
-                    },
-                    {
-                        "active": false,
-                        "angle": 0,
-                        "attrs": {
-                            ".background": {
-                                "fill": "#000000",
-                                "stroke": "#5C6773"
-                            },
-                            ".color-band": {
-                                "fill": "#3C444D"
-                            },
-                            ".functionBlock": {
-                                "text": "update cache"
-                            },
-                            ".inPorts>.port-in": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".inPorts>.port-in>.port-body": {
-                                "port": {
-                                    "id": "in",
-                                    "type": "in"
-                                }
-                            },
-                            ".message": {
-                                "opacity": 0,
-                                "ref-x": 5,
-                                "ref-y": 105,
-                                "text": "Configuring now"
-                            },
-                            ".outPorts>.port-out": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".outPorts>.port-out>.port-body": {
-                                "port": {
-                                    "id": "out",
-                                    "type": "out"
-                                }
-                            },
-                            ".title": {
-                                "text": "custom function"
-                            },
-                            "g.delete": {
-                                "display": "none"
-                            },
-                            "g.error": {
-                                "opacity": 1
-                            },
-                            "g.error image": {
-                                "xlink:href": "/inc/coa/img/block_icon_warn_grey.svg"
-                            },
-                            "g.notes": {
-                                "display": "block"
-                            },
-                            "g.notes image": {
-                                "opacity": 1
-                            }
-                        },
-                        "block_code": "def update_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('update_cache() called')\n    \n    check_cache__cacheOperation = json.loads(phantom.get_run_data(key='check_cache:cacheOperation'))\n    check_cache__cacheIndex = json.loads(phantom.get_run_data(key='check_cache:cacheIndex'))\n    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation:action_result.summary.malicious', 'file_reputation:action_result.data.*.attributes.meaningful_name', 'file_reputation:action_result.data.*.attributes.last_analysis_date'], action_results=results)\n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n    results_item_1_0 = [item[0] for item in results_data_1]\n    results_item_1_1 = [item[1] for item in results_data_1]\n    results_item_1_2 = [item[2] for item in results_data_1]\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Use variable names that are easier to follow\n    cacheOperation = check_cache__cacheOperation\n    cacheIndex = check_cache__cacheIndex\n    fileHash = filtered_artifacts_item_1_0[0]\n    fileName = results_item_1_1[0]\n    fileReputation = results_item_1_0[0]\n    fileLastAnalyzed = results_item_1_2[0]\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n    \n    phantom.debug(\"cache at start is: {}\".format(cache))\n    \n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n    \n    if cacheOperation == \"add\":\n        # Create cache entry from VT results\n        newEntry = []\n        newEntry.append(fileHash)\n        newEntry.append(fileName)\n        newEntry.append(fileLastAnalyzed)\n        newEntry.append(fileReputation)\n        newEntry.append(date.today().isoformat())\n        # Set counter tracking lookups to 0\n        newEntry.append(0)\n        # Add entry to cache\n        cache.append(newEntry)\n        cacheIndex = len(cache) - 1\n        \n        phantom.debug(\"new entry: {}\".format(newEntry))\n        \n    elif cacheOperation == \"update\":\n        # Update cache with latest results from VT\n        cache[cacheIndex][2] = fileLastAnalyzed\n        cache[cacheIndex][3] = fileReputation\n        cache[cacheIndex][4] = date.today().isoformat()\n        \n        phantom.debug(\"new values: {}, {}\".format(fileLastAnalyzed, fileReputation))\n    \n    # Increment counter tracking number of times we've looked up this file hash\n    cache[cacheIndex][5] = str(int(cache[cacheIndex][5]) + 1)\n    \n    # Pull results from cache list and update container\n    message = \"filehash: {0}, fileName: {1}, lastAnalyzed: {2}, malicous: {3}, updated: {4}, lookupCount: {5}\".format(\n        cache[cacheIndex][0],\n        cache[cacheIndex][1],\n        cache[cacheIndex][2],\n        cache[cacheIndex][3],\n        cache[cacheIndex][4],\n        cache[cacheIndex][5]\n    )\n    phantom.add_note(note_type=\"general\", title=\"VT Cache Results\", content=message)\n\n    phantom.debug(\"cache at end is: {}\".format(cache))\n\n    phantom.set_list(\"virus_total_cache\", cache)\n\n    # TODO set color and criticality\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    return",
-                        "callback_code": "",
-                        "callback_start": 1,
-                        "callsback": false,
-                        "connected_to_start": true,
-                        "connection_name": "no op",
-                        "connection_type": "action",
-                        "customCodeEndLineOffset": 4,
-                        "customCodeStartLine": 15,
-                        "custom_callback": "",
-                        "custom_code": "def update_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('update_cache() called')\n    \n    check_cache__cacheOperation = json.loads(phantom.get_run_data(key='check_cache:cacheOperation'))\n    check_cache__cacheIndex = json.loads(phantom.get_run_data(key='check_cache:cacheIndex'))\n    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation:action_result.summary.malicious', 'file_reputation:action_result.data.*.attributes.meaningful_name', 'file_reputation:action_result.data.*.attributes.last_analysis_date'], action_results=results)\n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n    results_item_1_0 = [item[0] for item in results_data_1]\n    results_item_1_1 = [item[1] for item in results_data_1]\n    results_item_1_2 = [item[2] for item in results_data_1]\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Use variable names that are easier to follow\n    cacheOperation = check_cache__cacheOperation\n    cacheIndex = check_cache__cacheIndex\n    fileHash = filtered_artifacts_item_1_0[0]\n    fileName = results_item_1_1[0]\n    fileReputation = results_item_1_0[0]\n    fileLastAnalyzed = results_item_1_2[0]\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n    \n    phantom.debug(\"cache at start is: {}\".format(cache))\n    \n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n    \n    if cacheOperation == \"add\":\n        # Create cache entry from VT results\n        newEntry = []\n        newEntry.append(fileHash)\n        newEntry.append(fileName)\n        newEntry.append(fileLastAnalyzed)\n        newEntry.append(fileReputation)\n        newEntry.append(date.today().isoformat())\n        # Set counter tracking lookups to 0\n        newEntry.append(0)\n        # Add entry to cache\n        cache.append(newEntry)\n        cacheIndex = len(cache) - 1\n        \n        phantom.debug(\"new entry: {}\".format(newEntry))\n        \n    elif cacheOperation == \"update\":\n        # Update cache with latest results from VT\n        cache[cacheIndex][2] = fileLastAnalyzed\n        cache[cacheIndex][3] = fileReputation\n        cache[cacheIndex][4] = date.today().isoformat()\n        \n        phantom.debug(\"new values: {}, {}\".format(fileLastAnalyzed, fileReputation))\n    \n    # Increment counter tracking number of times we've looked up this file hash\n    cache[cacheIndex][5] = str(int(cache[cacheIndex][5]) + 1)\n    \n    # Pull results from cache list and update container\n    message = \"filehash: {0}, fileName: {1}, lastAnalyzed: {2}, malicous: {3}, updated: {4}, lookupCount: {5}\".format(\n        cache[cacheIndex][0],\n        cache[cacheIndex][1],\n        cache[cacheIndex][2],\n        cache[cacheIndex][3],\n        cache[cacheIndex][4],\n        cache[cacheIndex][5]\n    )\n    phantom.add_note(note_type=\"general\", title=\"VT Cache Results\", content=message)\n\n    phantom.debug(\"cache at end is: {}\".format(cache))\n\n    phantom.set_list(\"virus_total_cache\", cache)\n\n    # TODO set color and criticality\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    return",
-                        "custom_join": "",
-                        "custom_name": "update cache",
-                        "description": "processes any updates to the cache and returns the file reputation of the hash",
-                        "functionBlock": "custom function",
-                        "has_custom": true,
-                        "has_custom_block": false,
-                        "has_custom_callback": false,
-                        "has_custom_join": false,
-                        "id": "20a8fc98-152e-4c1e-866f-4a54a44f302f",
-                        "inPorts": [
-                            "in"
-                        ],
-                        "join_code": "",
-                        "join_optional": [],
-                        "join_start": 1,
-                        "legacy": true,
-                        "line_end": 271,
-                        "line_start": 179,
-                        "message": "Configuring now",
-                        "name": "custom function",
-                        "notes": "",
-                        "number": 2,
-                        "order": 7,
-                        "outPorts": [
-                            "out"
-                        ],
-                        "outputVariables": [
-                            {
-                                "position": 0,
-                                "type": "",
-                                "value": ""
-                            }
-                        ],
-                        "parameters": [
-                            {
-                                "position": 0,
-                                "type": "",
-                                "value": "filtered-data:filter_1:condition_1:artifact:*.cef.fileHash"
-                            },
-                            {
-                                "position": 1,
-                                "type": "",
-                                "value": "check_cache:custom_function:cacheOperation"
-                            },
-                            {
-                                "position": 2,
-                                "type": "",
-                                "value": "check_cache:custom_function:cacheIndex"
-                            },
-                            {
-                                "position": 2,
-                                "type": "",
-                                "value": "file_reputation:action_result.summary.malicious"
-                            },
-                            {
-                                "position": 4,
-                                "type": "",
-                                "value": "file_reputation:action_result.data.*.attributes.meaningful_name"
-                            },
-                            {
-                                "position": 5,
-                                "type": "",
-                                "value": "file_reputation:action_result.data.*.attributes.last_analysis_date"
-                            }
-                        ],
-                        "ports": {
-                            "groups": {
-                                "in": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "left"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "left"
-                                    }
-                                },
-                                "out": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "right"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "right"
-                                    }
-                                }
-                            }
-                        },
-                        "position": {
-                            "x": 1200,
-                            "y": 80
-                        },
-                        "previous_function": "",
-                        "previous_name": "update_cache",
-                        "show_number": true,
-                        "size": {
-                            "height": 100,
-                            "width": 180
-                        },
-                        "state": "custom function",
-                        "status": "deprecating",
-                        "title": "custom function",
-                        "type": "coa.FunctionBlock",
-                        "userGeneratedCode": "\n    from datetime import date\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Use variable names that are easier to follow\n    cacheOperation = check_cache__cacheOperation\n    cacheIndex = check_cache__cacheIndex\n    fileHash = filtered_artifacts_item_1_0[0]\n    fileName = results_item_1_1[0]\n    fileReputation = results_item_1_0[0]\n    fileLastAnalyzed = results_item_1_2[0]\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n    \n    phantom.debug(\"cache at start is: {}\".format(cache))\n    \n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n    \n    if cacheOperation == \"add\":\n        # Create cache entry from VT results\n        newEntry = []\n        newEntry.append(fileHash)\n        newEntry.append(fileName)\n        newEntry.append(fileLastAnalyzed)\n        newEntry.append(fileReputation)\n        newEntry.append(date.today().isoformat())\n        # Set counter tracking lookups to 0\n        newEntry.append(0)\n        # Add entry to cache\n        cache.append(newEntry)\n        cacheIndex = len(cache) - 1\n        \n        phantom.debug(\"new entry: {}\".format(newEntry))\n        \n    elif cacheOperation == \"update\":\n        # Update cache with latest results from VT\n        cache[cacheIndex][2] = fileLastAnalyzed\n        cache[cacheIndex][3] = fileReputation\n        cache[cacheIndex][4] = date.today().isoformat()\n        \n        phantom.debug(\"new values: {}, {}\".format(fileLastAnalyzed, fileReputation))\n    \n    # Increment counter tracking number of times we've looked up this file hash\n    cache[cacheIndex][5] = str(int(cache[cacheIndex][5]) + 1)\n    \n    # Pull results from cache list and update container\n    message = \"filehash: {0}, fileName: {1}, lastAnalyzed: {2}, malicous: {3}, updated: {4}, lookupCount: {5}\".format(\n        cache[cacheIndex][0],\n        cache[cacheIndex][1],\n        cache[cacheIndex][2],\n        cache[cacheIndex][3],\n        cache[cacheIndex][4],\n        cache[cacheIndex][5]\n    )\n    phantom.add_note(note_type=\"general\", title=\"VT Cache Results\", content=message)\n\n    phantom.debug(\"cache at end is: {}\".format(cache))\n\n    phantom.set_list(\"virus_total_cache\", cache)\n\n    # TODO set color and criticality\n\n",
-                        "warn": false,
-                        "z": 80
                     },
                     {
                         "action": "file reputation",
@@ -2519,6 +2274,468 @@
                         "type": "coa.Filter",
                         "warn": false,
                         "z": 85
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "6a306bba-ac75-4db6-807b-bfe21f81edee",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "20a8fc98-152e-4c1e-866f-4a54a44f302f",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "60984be5-42b3-4cd7-83e1-74aa3398eda1",
+                            "selector": ".port-body[type=\"input\"]"
+                        },
+                        "type": "link",
+                        "z": 87
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "a441b61a-8810-4ff3-ad15-c4ebad5024ab",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "60984be5-42b3-4cd7-83e1-74aa3398eda1",
+                            "selector": "> g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "77e5d9bc-e72f-4f14-91ac-75f4cea94e12",
+                            "selector": "> g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 93
+                    },
+                    {
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".functionBlock": {
+                                "text": "update cache"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "custom function"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 1
+                            },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn_grey.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def update_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('update_cache() called')\n    \n    check_cache__cacheOperation = json.loads(phantom.get_run_data(key='check_cache:cacheOperation'))\n    check_cache__cacheIndex = json.loads(phantom.get_run_data(key='check_cache:cacheIndex'))\n    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation:action_result.summary.malicious', 'file_reputation:action_result.data.*.attributes.meaningful_name', 'file_reputation:action_result.data.*.attributes.last_analysis_date'], action_results=results)\n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n    results_item_1_0 = [item[0] for item in results_data_1]\n    results_item_1_1 = [item[1] for item in results_data_1]\n    results_item_1_2 = [item[2] for item in results_data_1]\n\n    update_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Use variable names that are easier to follow\n    cacheOperation = check_cache__cacheOperation\n    cacheIndex = check_cache__cacheIndex\n    fileHash = filtered_artifacts_item_1_0[0]\n    fileName = results_item_1_1[0]\n    fileReputation = results_item_1_0[0]\n    fileLastAnalyzed = results_item_1_2[0]\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n    \n    phantom.debug(\"cache at start is: {}\".format(cache))\n    \n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n    \n    if cacheOperation == \"add\":\n        # Create cache entry from VT results\n        newEntry = []\n        newEntry.append(fileHash)\n        newEntry.append(fileName)\n        newEntry.append(fileLastAnalyzed)\n        newEntry.append(fileReputation)\n        newEntry.append(date.today().isoformat())\n        # Set counter tracking lookups to 0\n        newEntry.append(0)\n        # Add entry to cache\n        cache.append(newEntry)\n        cacheIndex = len(cache) - 1\n        \n        phantom.debug(\"new entry: {}\".format(newEntry))\n        \n    elif cacheOperation == \"update\":\n        # Update cache with latest results from VT\n        cache[cacheIndex][2] = fileLastAnalyzed\n        cache[cacheIndex][3] = fileReputation\n        cache[cacheIndex][4] = date.today().isoformat()\n        \n        phantom.debug(\"new values: {}, {}\".format(fileLastAnalyzed, fileReputation))\n    \n    # Increment counter tracking number of times we've looked up this file hash\n    cache[cacheIndex][5] = str(int(cache[cacheIndex][5]) + 1)\n\n    # Save changes to cache\n    phantom.set_list(\"virus_total_cache\", cache)\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='update_cache:cacheIndex', value=json.dumps(update_cache__cacheIndex))\n    update_container(container=container)\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "no op",
+                        "connection_type": "action",
+                        "customCodeEndLineOffset": 7,
+                        "customCodeStartLine": 17,
+                        "custom_callback": "",
+                        "custom_code": "def update_cache(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('update_cache() called')\n    \n    check_cache__cacheOperation = json.loads(phantom.get_run_data(key='check_cache:cacheOperation'))\n    check_cache__cacheIndex = json.loads(phantom.get_run_data(key='check_cache:cacheIndex'))\n    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation:action_result.summary.malicious', 'file_reputation:action_result.data.*.attributes.meaningful_name', 'file_reputation:action_result.data.*.attributes.last_analysis_date'], action_results=results)\n    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_1:condition_1:artifact:*.cef.fileHash'])\n    filtered_artifacts_item_1_0 = [item[0] for item in filtered_artifacts_data_1]\n    results_item_1_0 = [item[0] for item in results_data_1]\n    results_item_1_1 = [item[1] for item in results_data_1]\n    results_item_1_2 = [item[2] for item in results_data_1]\n\n    update_cache__cacheIndex = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    from datetime import date\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Use variable names that are easier to follow\n    cacheOperation = check_cache__cacheOperation\n    cacheIndex = check_cache__cacheIndex\n    fileHash = filtered_artifacts_item_1_0[0]\n    fileName = results_item_1_1[0]\n    fileReputation = results_item_1_0[0]\n    fileLastAnalyzed = results_item_1_2[0]\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n    \n    phantom.debug(\"cache at start is: {}\".format(cache))\n    \n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n    \n    if cacheOperation == \"add\":\n        # Create cache entry from VT results\n        newEntry = []\n        newEntry.append(fileHash)\n        newEntry.append(fileName)\n        newEntry.append(fileLastAnalyzed)\n        newEntry.append(fileReputation)\n        newEntry.append(date.today().isoformat())\n        # Set counter tracking lookups to 0\n        newEntry.append(0)\n        # Add entry to cache\n        cache.append(newEntry)\n        cacheIndex = len(cache) - 1\n        \n        phantom.debug(\"new entry: {}\".format(newEntry))\n        \n    elif cacheOperation == \"update\":\n        # Update cache with latest results from VT\n        cache[cacheIndex][2] = fileLastAnalyzed\n        cache[cacheIndex][3] = fileReputation\n        cache[cacheIndex][4] = date.today().isoformat()\n        \n        phantom.debug(\"new values: {}, {}\".format(fileLastAnalyzed, fileReputation))\n    \n    # Increment counter tracking number of times we've looked up this file hash\n    cache[cacheIndex][5] = str(int(cache[cacheIndex][5]) + 1)\n\n    # Save changes to cache\n    phantom.set_list(\"virus_total_cache\", cache)\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='update_cache:cacheIndex', value=json.dumps(update_cache__cacheIndex))\n    update_container(container=container)\n\n    return",
+                        "custom_join": "",
+                        "custom_name": "update cache",
+                        "description": "processes any updates to the cache and returns the file reputation of the hash",
+                        "functionBlock": "custom function",
+                        "has_custom": true,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "20a8fc98-152e-4c1e-866f-4a54a44f302f",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "legacy": true,
+                        "line_end": 262,
+                        "line_start": 179,
+                        "message": "Configuring now",
+                        "name": "custom function",
+                        "notes": "",
+                        "number": 2,
+                        "order": 7,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "outputVariables": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "cacheIndex"
+                            }
+                        ],
+                        "parameters": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "filtered-data:filter_1:condition_1:artifact:*.cef.fileHash"
+                            },
+                            {
+                                "position": 1,
+                                "type": "",
+                                "value": "check_cache:custom_function:cacheOperation"
+                            },
+                            {
+                                "position": 2,
+                                "type": "",
+                                "value": "check_cache:custom_function:cacheIndex"
+                            },
+                            {
+                                "position": 2,
+                                "type": "",
+                                "value": "file_reputation:action_result.summary.malicious"
+                            },
+                            {
+                                "position": 4,
+                                "type": "",
+                                "value": "file_reputation:action_result.data.*.attributes.meaningful_name"
+                            },
+                            {
+                                "position": 5,
+                                "type": "",
+                                "value": "file_reputation:action_result.data.*.attributes.last_analysis_date"
+                            }
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 1200,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "update_cache",
+                        "show_number": true,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "custom function",
+                        "status": "deprecating",
+                        "title": "custom function",
+                        "type": "coa.FunctionBlock",
+                        "userGeneratedCode": "\n    from datetime import date\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Use variable names that are easier to follow\n    cacheOperation = check_cache__cacheOperation\n    cacheIndex = check_cache__cacheIndex\n    fileHash = filtered_artifacts_item_1_0[0]\n    fileName = results_item_1_1[0]\n    fileReputation = results_item_1_0[0]\n    fileLastAnalyzed = results_item_1_2[0]\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n    \n    phantom.debug(\"cache at start is: {}\".format(cache))\n    \n    phantom.debug(\"cacheOperation: {}, cacheIndex: {}\".format(cacheOperation, cacheIndex))\n    \n    if cacheOperation == \"add\":\n        # Create cache entry from VT results\n        newEntry = []\n        newEntry.append(fileHash)\n        newEntry.append(fileName)\n        newEntry.append(fileLastAnalyzed)\n        newEntry.append(fileReputation)\n        newEntry.append(date.today().isoformat())\n        # Set counter tracking lookups to 0\n        newEntry.append(0)\n        # Add entry to cache\n        cache.append(newEntry)\n        cacheIndex = len(cache) - 1\n        \n        phantom.debug(\"new entry: {}\".format(newEntry))\n        \n    elif cacheOperation == \"update\":\n        # Update cache with latest results from VT\n        cache[cacheIndex][2] = fileLastAnalyzed\n        cache[cacheIndex][3] = fileReputation\n        cache[cacheIndex][4] = date.today().isoformat()\n        \n        phantom.debug(\"new values: {}, {}\".format(fileLastAnalyzed, fileReputation))\n    \n    # Increment counter tracking number of times we've looked up this file hash\n    cache[cacheIndex][5] = str(int(cache[cacheIndex][5]) + 1)\n\n    # Save changes to cache\n    phantom.set_list(\"virus_total_cache\", cache)\n\n",
+                        "warn": false,
+                        "z": 100
+                    },
+                    {
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".functionBlock": {
+                                "text": "update container"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "custom function"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 1
+                            },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn_grey.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            }
+                        },
+                        "block_code": "def update_container(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('update_container() called')\n    \n    update_cache__cacheIndex = json.loads(phantom.get_run_data(key='update_cache:cacheIndex'))\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n\n    # Retrieve desired row from cache\n    entry = cache[update_cache__cacheIndex]\n    \n    card_color = \"white\"\n    if entry[3] > 0:\n        # If the file is malicious, set the severity as \"High\"\n        phantom.set_severity(container, \"High\")\n        card_color = \"red\"\n        data = \"malicious file hash\"\n    else:\n        # If the file is not malicious, set the severity as \"Low\"\n        phantom.set_severity(container, \"Low\")\n        data = \"benign file hash\"\n    \n    # Summarize the outcome of the file lookup with a score or summary and pin the data to the HUD with an appropriate colored card\n    msg = \"hash: {}\\nfilename: {}\\nVT malicious count: {}\".format(entry[0], entry[1], entry[3])\n    phantom.pin(container=container,\n                message=msg,\n                data=data,\n                pin_type='card',\n                pin_style=card_color)\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": true,
+                        "connection_name": "no op",
+                        "connection_type": "action",
+                        "customCodeEndLineOffset": 4,
+                        "customCodeStartLine": 8,
+                        "custom_callback": "",
+                        "custom_code": "def update_container(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug('update_container() called')\n    \n    update_cache__cacheIndex = json.loads(phantom.get_run_data(key='update_cache:cacheIndex'))\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n\n    # Retrieve desired row from cache\n    entry = cache[update_cache__cacheIndex]\n    \n    card_color = \"white\"\n    if entry[3] > 0:\n        # If the file is malicious, set the severity as \"High\"\n        phantom.set_severity(container, \"High\")\n        card_color = \"red\"\n        data = \"malicious file hash\"\n    else:\n        # If the file is not malicious, set the severity as \"Low\"\n        phantom.set_severity(container, \"Low\")\n        data = \"benign file hash\"\n    \n    # Summarize the outcome of the file lookup with a score or summary and pin the data to the HUD with an appropriate colored card\n    msg = \"hash: {}\\nfilename: {}\\nVT malicious count: {}\".format(entry[0], entry[1], entry[3])\n    phantom.pin(container=container,\n                message=msg,\n                data=data,\n                pin_type='card',\n                pin_style=card_color)\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    return",
+                        "custom_join": "",
+                        "custom_name": "update container",
+                        "description": "",
+                        "functionBlock": "custom function",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "60984be5-42b3-4cd7-83e1-74aa3398eda1",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "legacy": true,
+                        "line_end": 311,
+                        "line_start": 262,
+                        "message": "Configuring now",
+                        "name": "custom function",
+                        "notes": "",
+                        "number": 4,
+                        "order": 8,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "outputVariables": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": ""
+                            }
+                        ],
+                        "parameters": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "update_cache:custom_function:cacheIndex"
+                            }
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 1440,
+                            "y": 80
+                        },
+                        "previous_function": "",
+                        "previous_name": "update_container",
+                        "show_number": true,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "custom function",
+                        "status": "deprecating",
+                        "title": "custom function",
+                        "type": "coa.FunctionBlock",
+                        "userGeneratedCode": "\n    # Cache Structure\n    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0\n    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1\n    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2\n    # ...\n    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n\n\n    # Retrieve list containing cache\n    success, message, cache = phantom.get_list(\"virus_total_cache\")\n\n    # TODO put in error handling here if list can't be retrieved\n\n    # Retrieve desired row from cache\n    entry = cache[update_cache__cacheIndex]\n    \n    card_color = \"white\"\n    if entry[3] > 0:\n        # If the file is malicious, set the severity as \"High\"\n        phantom.set_severity(container, \"High\")\n        card_color = \"red\"\n        data = \"malicious file hash\"\n    else:\n        # If the file is not malicious, set the severity as \"Low\"\n        phantom.set_severity(container, \"Low\")\n        data = \"benign file hash\"\n    \n    # Summarize the outcome of the file lookup with a score or summary and pin the data to the HUD with an appropriate colored card\n    msg = \"hash: {}\\nfilename: {}\\nVT malicious count: {}\".format(entry[0], entry[1], entry[3])\n    phantom.pin(container=container,\n                message=msg,\n                data=data,\n                pin_type='card',\n                pin_style=card_color)\n\n",
+                        "warn": false,
+                        "z": 101
                     }
                 ]
             },
@@ -2531,7 +2748,7 @@
         "schema": "4",
         "version": "5.2.1.78411"
     },
-    "create_time": "2022-03-06T14:42:06.186408+00:00",
+    "create_time": "2022-03-06T15:34:00.038320+00:00",
     "draft_mode": false,
     "labels": [
         "class"

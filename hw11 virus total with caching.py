@@ -188,6 +188,8 @@ def update_cache(action=None, success=None, container=None, results=None, handle
     results_item_1_1 = [item[1] for item in results_data_1]
     results_item_1_2 = [item[2] for item in results_data_1]
 
+    update_cache__cacheIndex = None
+
     ################################################################################
     ## Custom Code Start
     ################################################################################
@@ -244,23 +246,61 @@ def update_cache(action=None, success=None, container=None, results=None, handle
     
     # Increment counter tracking number of times we've looked up this file hash
     cache[cacheIndex][5] = str(int(cache[cacheIndex][5]) + 1)
-    
-    # Pull results from cache list and update container
-    message = "filehash: {0}, fileName: {1}, lastAnalyzed: {2}, malicous: {3}, updated: {4}, lookupCount: {5}".format(
-        cache[cacheIndex][0],
-        cache[cacheIndex][1],
-        cache[cacheIndex][2],
-        cache[cacheIndex][3],
-        cache[cacheIndex][4],
-        cache[cacheIndex][5]
-    )
-    phantom.add_note(note_type="general", title="VT Cache Results", content=message)
 
-    phantom.debug("cache at end is: {}".format(cache))
-
+    # Save changes to cache
     phantom.set_list("virus_total_cache", cache)
 
-    # TODO set color and criticality
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.save_run_data(key='update_cache:cacheIndex', value=json.dumps(update_cache__cacheIndex))
+    update_container(container=container)
+
+    return
+
+def update_container(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug('update_container() called')
+    
+    update_cache__cacheIndex = json.loads(phantom.get_run_data(key='update_cache:cacheIndex'))
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Cache Structure
+    # file_hash_0, file_name_0, file_analysis_date_0, malicous_value_0, lookup_date_0, lookup_count_0
+    # file_hash_1, file_name_1, file_analysis_date_1, malicous_value_1, lookup_date_1, lookup_count_1
+    # file_hash_2, file_name_2, file_analysis_date_2, malicous_value_2, lookup_date_2, lookup_count_2
+    # ...
+    # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n
+
+    # Retrieve list containing cache
+    success, message, cache = phantom.get_list("virus_total_cache")
+
+    # TODO put in error handling here if list can't be retrieved
+
+    # Retrieve desired row from cache
+    entry = cache[update_cache__cacheIndex]
+    
+    card_color = "white"
+    if entry[3] > 0:
+        # If the file is malicious, set the severity as "High"
+        phantom.set_severity(container, "High")
+        card_color = "red"
+        data = "malicious file hash"
+    else:
+        # If the file is not malicious, set the severity as "Low"
+        phantom.set_severity(container, "Low")
+        data = "benign file hash"
+    
+    # Summarize the outcome of the file lookup with a score or summary and pin the data to the HUD with an appropriate colored card
+    msg = "hash: {}\nfilename: {}\nVT malicious count: {}".format(entry[0], entry[1], entry[3])
+    phantom.pin(container=container,
+                message=msg,
+                data=data,
+                pin_type='card',
+                pin_style=card_color)
 
     ################################################################################
     ## Custom Code End
