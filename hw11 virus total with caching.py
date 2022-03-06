@@ -231,11 +231,16 @@ def update_cache(action=None, success=None, container=None, results=None, handle
         # Add entry to cache
         cache.append(newEntry)
         cacheIndex = len(cache) - 1
+        
+        phantom.debug("new entry: {}".format(newEntry))
+        
     elif cacheOperation == "update":
         # Update cache with latest results from VT
         cache[cacheIndex][2] = fileLastAnalyzed
         cache[cacheIndex][3] = fileReputation
         cache[cacheIndex][4] = date.today().isoformat()
+        
+        phantom.debug("new values: {}, {}".format(fileLastAnalyzed, fileReputation))
     
     # Increment counter tracking number of times we've looked up this file hash
     cache[cacheIndex][5] = str(int(cache[cacheIndex][5]) + 1)
