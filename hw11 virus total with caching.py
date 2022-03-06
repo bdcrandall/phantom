@@ -262,6 +262,7 @@ def update_cache(action=None, success=None, container=None, results=None, handle
 def update_container(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug('update_container() called')
     
+    check_cache__cacheIndex = json.loads(phantom.get_run_data(key='check_cache:cacheIndex'))
     update_cache__cacheIndex = json.loads(phantom.get_run_data(key='update_cache:cacheIndex'))
 
     ################################################################################
@@ -275,13 +276,20 @@ def update_container(action=None, success=None, container=None, results=None, ha
     # ...
     # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n
 
+    # Grab the correct cachIndex
+    cacheIndex = check_cache__cacheIndex
+    
+    # If the index value from check cache is -1, value was not in cache and we need the index from update cache
+    if check_cache__cacheIndex == -1:
+        cacheIndex = update_cache__cacheIndex
+
     # Retrieve list containing cache
     success, message, cache = phantom.get_list("virus_total_cache")
 
     # TODO put in error handling here if list can't be retrieved
 
     # Retrieve desired row from cache
-    entry = cache[update_cache__cacheIndex]
+    entry = cache[cacheIndex]
     
     card_color = "white"
     if entry[3] > 0:
