@@ -301,6 +301,9 @@ def update_container(action=None, success=None, container=None, results=None, ha
                 pin_type='card',
                 pin_style=card_color)
 
+    # Create a note as well because I can't find where PINs wind up in the HUD
+    phantom.add_note(note_type="general", title="VT Cache Results", content=msg)
+    
     phantom.debug("success: {}, response: {}, pinid: {}".format(success, response, pinid))
 
     ################################################################################
