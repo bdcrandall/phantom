@@ -137,7 +137,7 @@ def file_reputation(action=None, success=None, container=None, results=None, han
                 'context': {'artifact_id': filtered_artifacts_item_1[1]},
             })
 
-    phantom.act(action="file reputation", parameters=parameters, assets=['virustotal'], callback=join_no_op_1, name="file_reputation")
+    phantom.act(action="file reputation", parameters=parameters, assets=['virustotal'], callback=update_cache, name="file_reputation")
 
     return
 
@@ -155,7 +155,7 @@ def no_op_1(action=None, success=None, container=None, results=None, handle=None
         'sleep_seconds': 1,
     })
 
-    phantom.act(action="no op", parameters=parameters, assets=['phantom'], callback=update_cache, name="no_op_1")
+    phantom.act(action="no op", parameters=parameters, assets=['phantom'], callback=update_container, name="no_op_1")
 
     return
 
@@ -255,7 +255,7 @@ def update_cache(action=None, success=None, container=None, results=None, handle
     ################################################################################
 
     phantom.save_run_data(key='update_cache:cacheIndex', value=json.dumps(update_cache__cacheIndex))
-    update_container(container=container)
+    join_no_op_1(container=container)
 
     return
 
