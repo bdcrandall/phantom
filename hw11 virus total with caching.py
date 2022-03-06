@@ -61,26 +61,25 @@ def check_cache(action=None, success=None, container=None, results=None, handle=
     # Default operation is to look up info and add it to cache
     cacheOperation = "add"
     
-    # Default value indicates fileHash is not in the cache
     cacheIndex = -1
         
     # Iterate through cache to search for fileHash
-    for entry in range(0, len(cache)):
-        if cache[entry][0] == fileHash:
+    for cacheIndex in range(0, len(cache)):
+        if cache[cacheIndex][0] == fileHash:
             # Convert string to date object
-            yearMonthDay = cache[entry][4].split("-")
+            yearMonthDay = cache[cacheIndex][4].split("-")
             lastUpdated = date(int(yearMonthDay[0]),int(yearMonthDay[1]),int(yearMonthDay[2]))
             
             if date.today() - lastUpdated > maxAge:
                 # Cached info is too old and needs to be updated
                 cacheOperation = "update"
-                cacheIndex = entry
                 break
             else:
                 # Cached info is current so just read it
                 cacheOperation = "read"
-                cacheIndex = entry
                 break
+    
+    phantom.debug("cacheIndex is {}".format(cacheIndex))
     
     # Return the operation the rest of the playbook will perform
     check_cache__cacheOperation = cacheOperation
@@ -152,7 +151,7 @@ def no_op_1(action=None, success=None, container=None, results=None, handle=None
     
     # build parameters list for 'no_op_1' call
     parameters.append({
-        'sleep_seconds': 1,
+        'sleep_seconds': 0,
     })
 
     phantom.act(action="no op", parameters=parameters, assets=['phantom'], callback=update_container, name="no_op_1")
@@ -263,7 +262,6 @@ def update_container(action=None, success=None, container=None, results=None, ha
     phantom.debug('update_container() called')
     
     check_cache__cacheIndex = json.loads(phantom.get_run_data(key='check_cache:cacheIndex'))
-    update_cache__cacheIndex = json.loads(phantom.get_run_data(key='update_cache:cacheIndex'))
 
     ################################################################################
     ## Custom Code Start
@@ -276,20 +274,13 @@ def update_container(action=None, success=None, container=None, results=None, ha
     # ...
     # file_hash_n, file_name_n, file_analysis_date_n, malicous_value_n, lookup_date_n, lookup_count_n
 
-    # Grab the correct cachIndex
-    cacheIndex = check_cache__cacheIndex
-    
-    # If the index value from check cache is -1, value was not in cache and we need the index from update cache
-    if check_cache__cacheIndex == -1:
-        cacheIndex = update_cache__cacheIndex
-
     # Retrieve list containing cache
     success, message, cache = phantom.get_list("virus_total_cache")
 
     # TODO put in error handling here if list can't be retrieved
 
     # Retrieve desired row from cache
-    entry = cache[cacheIndex]
+    entry = cache[check_cache__cacheIndex]
     
     card_color = "white"
     if entry[3] > 0:
