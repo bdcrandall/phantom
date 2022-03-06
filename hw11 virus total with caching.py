@@ -205,9 +205,9 @@ def update_cache(action=None, success=None, container=None, results=None, handle
     cacheOperation = check_cache__cacheOperation
     cacheIndex = check_cache__cacheIndex
     fileHash = filtered_artifacts_item_1_0
-    fileName = results_item_1_1
-    fileReputation = results_item_1_0
-    fileLastAnalyzed = results_item_1_2
+    fileName = results_item_1_1[0]
+    fileReputation = results_item_1_0[0]
+    fileLastAnalyzed = results_item_1_2[0]
 
     # Retrieve list containing cache
     success, message, cache = phantom.get_list("virus_total_cache")
