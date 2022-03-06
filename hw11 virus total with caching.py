@@ -207,7 +207,7 @@ def update_cache(action=None, success=None, container=None, results=None, handle
     cacheOperation = check_cache__cacheOperation
     cacheIndex = check_cache__cacheIndex
     fileHash = filtered_artifacts_item_1_0[0]
-    fileName = results_item_1_1[0]
+    fileName = results_item_1_1
     fileReputation = results_item_1_0[0]
     fileLastAnalyzed = results_item_1_2[0]
 
