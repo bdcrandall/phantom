@@ -295,11 +295,13 @@ def update_container(action=None, success=None, container=None, results=None, ha
     
     # Summarize the outcome of the file lookup with a score or summary and pin the data to the HUD with an appropriate colored card
     msg = "hash: {}\nfilename: {}\nVT malicious count: {}".format(entry[0], entry[1], entry[3])
-    phantom.pin(container=container,
+    success, response, pinid = phantom.pin(container=container,
                 message=msg,
                 data=data,
                 pin_type='card',
                 pin_style=card_color)
+
+    phantom.debug("success: {}, response: {}, pinid: {}".format(success, response, pinid))
 
     ################################################################################
     ## Custom Code End
