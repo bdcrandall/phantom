@@ -283,7 +283,7 @@ def update_container(action=None, success=None, container=None, results=None, ha
     entry = cache[check_cache__cacheIndex]
     
     card_color = "white"
-    if entry[3] > 0:
+    if int(entry[3]) > 0:
         # If the file is malicious, set the severity as "High"
         phantom.set_severity(container, "High")
         card_color = "red"
